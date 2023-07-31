@@ -1,0 +1,38 @@
+import { useSelector } from "react-redux";
+import dashboard from "./dashboard";
+import parking from "./parking";
+import booking from "./booking";
+import admin from "./admin";
+import user from "./user";
+import business from "./business";
+import report from "./reportFee";
+import fee from "./feeSetting";
+import parkingPending from "./parkingPending";
+import parkingRequest from "./parkingRequest";
+
+const Menu = () => {
+  const tokenAdmin = useSelector((state) => state.token.tokenAdmin);
+  const tokenStaff = useSelector((state) => state.token.tokenStaff);
+
+  const menuItems = {
+    items: tokenAdmin
+      ? [
+          dashboard,
+          admin,
+          user,
+          business,
+          parking,
+          parkingPending,
+          booking,
+          report,
+          fee,
+        ]
+      : tokenStaff
+      ? [parkingRequest]
+      : null,
+  };
+  return menuItems;
+  // render the menu using the `menuItems` object...
+};
+
+export default Menu;
