@@ -12,6 +12,8 @@ import CreateModalStaff from "ui-component/modal/staff-modal/create-modal/Create
 import SubCard from "ui-component/cards/SubCard";
 import Loading from "ui-component/back-drop/Loading";
 import { ImFilesEmpty } from "react-icons/im";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const renderAvatarCell = (params) => {
   return (
@@ -96,12 +98,23 @@ const columns = [
     width: 100,
     sortable: false,
     disableColumnMenu: true,
-    renderCell: (params) => <Menu value={params.value} id={params.id} />,
+    align: "center",
+    renderCell: (params) => <Menu id={params.id} />,
   },
 ];
 
 export default function MyAdmin(props) {
   const { rows, loading } = props;
+  const dataGridRef = useRef(null);
+
+  useEffect(() => {
+    if (dataGridRef.current) {
+      // get the height of the DataGrid using the ref
+      const height = dataGridRef.current.clientHeight;
+      // set the height of the outer div to be the same as the DataGrid height
+      document.getElementById("outer-div").style.height = `${height}px`;
+    }
+  }, [rows]);
 
   const dispatch = useDispatch();
 
@@ -144,10 +157,11 @@ export default function MyAdmin(props) {
           ></SubCardStaff>
         </Grid>
         {rows ? (
-          <div style={{ height: "500px", width: "100%" }}>
+          <div id="outer-div">
             <DataGrid
               rows={rows}
               rowHeight={70}
+              autoHeight
               getRowId={(row) => row.userId}
               columns={columns}
               initialState={{

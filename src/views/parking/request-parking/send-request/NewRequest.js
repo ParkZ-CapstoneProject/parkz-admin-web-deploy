@@ -24,7 +24,7 @@ const NewRequest = () => {
       component: <ApproveParkingDetail parkingId={parkingId} />,
     },
     {
-      label: "Thông tin xa bàn",
+      label: "Thông tin sa bàn",
       component: <FloorParking parkingId={parkingId} />,
     },
     {

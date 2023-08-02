@@ -16,6 +16,7 @@ const Profile = Loadable(lazy(() => import("views/profile/Profile")));
 const Admin = Loadable(lazy(() => import("views/admin/Index")));
 const Customer = Loadable(lazy(() => import("views/customer/Index")));
 const Business = Loadable(lazy(() => import("views/business/Index")));
+const Order = Loadable(lazy(() => import("views/order/Order")));
 const Fee = Loadable(lazy(() => import("views/fee/Fee")));
 
 const ParkingAll = Loadable(
@@ -34,23 +35,6 @@ const RequestedParking = Loadable(
 const NewRequest = Loadable(
   lazy(() => import("views/parking/request-parking/send-request/NewRequest"))
 );
-// const ParkingPrice = Loadable(
-//   lazy(() => import("views/parking/parking-price/Index"))
-// );
-// const ButtonDrag = Loadable(
-//   lazy(() => import("ui-component/buttons/qr-button-drag/FloatingButton"))
-// );
-// const CreateNewParking = Loadable(
-//   lazy(() => import("ui-component/parking/parking-all/step1/CreateNewParking"))
-// );
-
-// const CreateNewImage = Loadable(
-//   lazy(() => import("ui-component/parking/parking-images/NewImageCustom"))
-// );
-
-// const CreateNewPrice = Loadable(
-//   lazy(() => import("ui-component/parking/parking-price/CreateNewPrice"))
-// );
 
 const ImageParking = Loadable(
   lazy(() => import("views/parking/single-parking/parking-images/Index"))
@@ -141,6 +125,10 @@ const MainRoutes = {
     {
       path: `/price-detail-parking/:priceId`,
       element: <ParkingPriceDetailParking />,
+    },
+    {
+      path: `/order`,
+      element: <Order />,
     },
   ],
 };

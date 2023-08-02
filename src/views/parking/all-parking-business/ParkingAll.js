@@ -5,10 +5,21 @@ import Menu from "ui-component/parking/parking-all/Menu";
 import Swal from "sweetalert2";
 // import { useNavigate } from "react-router";
 import { ImFilesEmpty } from "react-icons/im";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 export default function MyParkingAll(props) {
   const { rows } = props;
+  const dataGridRef = useRef(null);
 
+  useEffect(() => {
+    if (dataGridRef.current) {
+      // get the height of the DataGrid using the ref
+      const height = dataGridRef.current.clientHeight;
+      // set the height of the outer div to be the same as the DataGrid height
+      document.getElementById("outer-div").style.height = `${height}px`;
+    }
+  }, [rows]);
   // const navigate = useNavigate();
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
@@ -55,31 +66,6 @@ export default function MyParkingAll(props) {
               });
             }
           }
-          // else {
-          //   const requestOptions = {
-          //     method: "PUT",
-          //     headers: {
-          //       Authorization: `bearer ${token}`,
-          //       "Content-Type": "application/json",
-          //     },
-          //   };
-          //   const response = await fetch(
-          //     `${apiUrl}/parkings/parking/full/${params.id}`,
-          //     requestOptions
-          //   );
-          //   console.log("response", response.status);
-          //   if (response.status === 204) {
-          //     Swal.fire({
-          //       icon: "success",
-          //       text: "Cập nhật trạng thái thành công!",
-          //     });
-          //   } else {
-          //     Swal.fire({
-          //       icon: "error",
-          //       text: "Cập nhật trạng thái thất bạij!",
-          //     });
-          //   }
-          // }
         } catch (err) {
           console.error(err);
         }
@@ -130,7 +116,7 @@ export default function MyParkingAll(props) {
     {
       field: "carSpot",
       headerName: "Vị trí ô tô",
-      type: "number",
+      // type: "number",
       width: 210,
       valueGetter: getCellValue,
     },
@@ -167,21 +153,12 @@ export default function MyParkingAll(props) {
 
   return (
     <>
-      {/* <MainCard title={"Tất cả bãi"}>
-        <Grid item xs={12}>
-          <SubCardStaff
-            startComponent={<SearchSection />}
-            endComponent={
-              <CreateButton onClick={() => navigate("/new-parking")} />
-            }
-          ></SubCardStaff>
-        </Grid> */}
-
       {rows ? (
-        <div style={{ height: "400px", width: "100%", marginTop: "10px" }}>
+        <div id="outer-div" style={{ marginTop: "10px" }}>
           <DataGrid
             rows={rows}
             rowHeight={70}
+            autoHeight
             getRowId={(row) => row.parkingId}
             columns={columns}
             initialState={{
@@ -208,7 +185,6 @@ export default function MyParkingAll(props) {
           />
         </>
       )}
-      {/* </MainCard> */}
     </>
   );
 }

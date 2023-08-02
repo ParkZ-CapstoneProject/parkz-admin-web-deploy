@@ -288,8 +288,6 @@ const ItemModal = ({ modalType }) => {
           </Grid>
         </Grid>
       </Grid>
-
-      {/* <DialogDelete open={openDialog} modalType={modalType} /> */}
     </>
   );
 };

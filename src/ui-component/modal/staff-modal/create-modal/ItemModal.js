@@ -1,3 +1,4 @@
+import React from "react";
 import {
   FormControl,
   Grid,
@@ -8,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React, { useEffect } from "react";
 import { useState } from "react";
 import SaveButton from "ui-component/buttons/save-button/SaveButton";
 import CancelButton from "ui-component/buttons/cancel-button/CancelButton";
@@ -28,7 +28,6 @@ const ItemModal = ({ modalType }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [avatar, setAvatar] = useState("");
-  console.log("avatar", avatar);
 
   const handleInputPhone = (event) => {
     const { value } = event.target;
@@ -55,7 +54,6 @@ const ItemModal = ({ modalType }) => {
   const handleDateOfBirthChange = (e) => {
     setDateOfBirth(e.target.value);
   };
-  // console.log("dateOfBirth", dateOfBirth);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -63,16 +61,6 @@ const ItemModal = ({ modalType }) => {
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
-  const user = localStorage.getItem("admin"); // Set the authentication status here
-  const userData = JSON.parse(user);
-
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      Authorization: `bearer ${token}`, // Replace `token` with your actual bearer token
-      "Content-Type": "application/json", // Replace with the appropriate content type
-    },
-  };
 
   const [gender, setGender] = useState("Nam");
 
@@ -344,8 +332,6 @@ const ItemModal = ({ modalType }) => {
           </Grid>
         </Grid>
       </Grid>
-
-      {/* <DialogCreate open={openDialog} modalType={modalType} /> */}
     </>
   );
 };

@@ -2,13 +2,20 @@ import React from "react";
 import "./FeeCardPerson.scss";
 
 const FeeCardPerson = (props) => {
-  const { setEdit, setIsOpen, setId } = props;
+  const { setEdit, setIsOpen, setId, person } = props;
 
   const handleClick = () => {
     setEdit(true);
     setIsOpen(true);
-    setId(4);
+    setId(person.feeId);
   };
+
+  const formatPrice = (price) => {
+    const formattedNumber = price?.toLocaleString("vi-VN");
+
+    return formattedNumber;
+  };
+
   return (
     <div className="card-person" onClick={handleClick}>
       <div className="img-person">
@@ -57,11 +64,11 @@ const FeeCardPerson = (props) => {
       </div>
 
       <div className="text-person">
-        <p className="h3-person"> Cước phí mặc định doanh nghiệp </p>
-        <p className="p-person"> Loại hình: Tư nhân </p>
+        <p className="h3-person"> {person?.name} </p>
+        <p className="p-person"> Loại hình: {person?.businessType} </p>
       </div>
       <div className="price-person">
-        <h1 className="money-person">50.000</h1>
+        <h1 className="money-person">{formatPrice(person?.price)}</h1>
         <p className="month-person">đ/tháng </p>
       </div>
     </div>

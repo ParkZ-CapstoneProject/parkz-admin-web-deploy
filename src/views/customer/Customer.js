@@ -8,6 +8,8 @@ import CreateModalStaff from "ui-component/modal/staff-modal/create-modal/Create
 import SubCard from "ui-component/cards/SubCard";
 import Loading from "ui-component/back-drop/Loading";
 import { ImFilesEmpty } from "react-icons/im";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const renderAvatarCell = (params) => {
   return (
@@ -92,13 +94,23 @@ const columns = [
     width: 80,
     sortable: false,
     disableColumnMenu: true,
+    align: "center",
     renderCell: (params) => <Menu value={params.value} id={params.id} />,
   },
 ];
 
 export default function MyCustomer(props) {
   const { rows, loading } = props;
-  console.log("rows", rows);
+  const dataGridRef = useRef(null);
+
+  useEffect(() => {
+    if (dataGridRef.current) {
+      // get the height of the DataGrid using the ref
+      const height = dataGridRef.current.clientHeight;
+      // set the height of the outer div to be the same as the DataGrid height
+      document.getElementById("outer-div").style.height = `${height}px`;
+    }
+  }, [rows]);
 
   if (loading) {
     // Render the Skeleton components or any other loading indicator
@@ -130,10 +142,11 @@ export default function MyCustomer(props) {
           </SubCard>
         </Grid>
         {rows ? (
-          <div style={{ height: "500px", width: "100%" }}>
+          <div id="outer-div">
             <DataGrid
               rows={rows}
               rowHeight={70}
+              autoHeight
               getRowId={(row) => row.userId}
               columns={columns}
               initialState={{

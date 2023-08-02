@@ -5,9 +5,9 @@ import SearchSection from "ui-component/search-section";
 import SubCard from "ui-component/cards/SubCard";
 import { Avatar, Chip, Grid, Skeleton } from "@mui/material";
 import Menu from "ui-component/booking/Menu";
-import FloatingButton from "ui-component/buttons/qr-button-drag/FloatingButton";
-import { useNavigate } from "react-router";
 import Loading from "ui-component/back-drop/Loading";
+import { useRef } from "react";
+import { useEffect } from "react";
 // import Loading from "ui-component/back-drop/Loading";
 
 const renderAvatarCell = (params) => {
@@ -20,24 +20,25 @@ const getCellValue = (params) => {
 
 const renderCellStatus = (params) => {
   const statusMap = {
-    "Khởi tạo": { color: "#fff", bgColor: "gray" },
-    "Thành công": { color: "#fff", bgColor: "#4caf50" },
-    "Đã duyệt": { color: "#fff", bgColor: "#1976d2" },
-    "Vào bãi": { color: "#fff", bgColor: "#f44336" },
-    "Ra bãi": { color: "#000", bgColor: "#ff9800" },
-    "Chờ thanh toán": { color: "#fff", bgColor: "#2196f3" },
-    "Hủy đơn": { color: "#fff", bgColor: "#f44336" },
+    Initial: { label: "Khởi tạo", color: "#fff", bgColor: "gray" },
+    Done: { label: "Hoàn thành", color: "#fff", bgColor: "#4caf50" },
+    OverTime: { label: "Quá hạn", color: "#fff", bgColor: "#1976d2" },
+    Check_In: { label: "Check in", color: "#fff", bgColor: "#f44336" },
+    Check_Out: { label: "Check out", color: "#000", bgColor: "#ff9800" },
+    Success: { label: "Thành công", color: "#fff", bgColor: "#2196f3" },
+    Cancel: { label: "Hủy bỏ", color: "#fff", bgColor: "#f44336" },
   };
 
   const { value } = params;
   const statusStyle = statusMap[value] || {
+    label: value,
     color: "inherit",
     bgColor: "gray",
   };
 
   return (
     <Chip
-      label={value}
+      label={statusStyle.label}
       sx={{
         backgroundColor: statusStyle.bgColor,
         color: statusStyle.color,
@@ -127,17 +128,23 @@ const columns = [
     width: 70,
     sortable: false,
     disableColumnMenu: true,
+    align: "center",
     renderCell: (params) => <Menu value={params.value} id={params.id} />,
   },
 ];
 
 export default function DataTable(props) {
   const { rows, loading } = props;
-  const navigate = useNavigate();
+  const dataGridRef = useRef(null);
 
-  const handleOpenScanner = () => {
-    navigate("/qr");
-  };
+  useEffect(() => {
+    if (dataGridRef.current) {
+      // get the height of the DataGrid using the ref
+      const height = dataGridRef.current.clientHeight;
+      // set the height of the outer div to be the same as the DataGrid height
+      document.getElementById("outer-div").style.height = `${height}px`;
+    }
+  }, [rows]);
 
   if (loading) {
     // Render the Skeleton components or any other loading indicator
@@ -168,10 +175,11 @@ export default function DataTable(props) {
             <SearchSection />
           </SubCard>
         </Grid>
-        <div style={{ height: "500px", width: "100%" }}>
+        <div id="outer-div">
           <DataGrid
             rows={rows}
             rowHeight={70}
+            autoHeight
             columns={columns}
             initialState={{
               pagination: {
@@ -184,7 +192,6 @@ export default function DataTable(props) {
           />
         </div>
       </MainCard>
-      <FloatingButton handleOpenScanner={handleOpenScanner} />
     </>
   );
 }

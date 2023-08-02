@@ -161,8 +161,9 @@
 }
 
 .MuiDataGrid-columnHeaderTitleContainer {
-  justify-content: center;
+  justify-content: flex-start;
 }
+
 // .MuiDataGrid-row {
 //   max-height: 58px !important;
 //   min-height: 58px !important;
@@ -204,10 +205,10 @@
   background-color: #f1f1f1 !important;
 }
 
-.css-8ybyx8-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
-  width: 20%;
-  left: 900px !important;
-}
+// .css-8ybyx8-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
+//   width: 20%;
+//   left: 900px !important;
+// }
 
 .css-y599qu {
   min-height: 65px !important;

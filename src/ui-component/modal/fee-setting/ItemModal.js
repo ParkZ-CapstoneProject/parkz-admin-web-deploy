@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormControl,
   Grid,
@@ -13,25 +13,61 @@ import { useState } from "react";
 import SaveButton from "ui-component/buttons/save-button/SaveButton";
 import CancelButton from "ui-component/buttons/cancel-button/CancelButton";
 import Swal from "sweetalert2";
+import DeleteButton from "ui-component/buttons/delete-button/DeleteButton";
 
 const ItemModal = (props) => {
   const { setIsOpen, edit, id } = props;
-  console.log("id", id);
   const theme = useTheme();
 
-  const [name, setName] = useState("");
-  const [typeBusiness, setTypeBusiness] = useState("Doanh nghiệp");
-  const [price, setPrice] = useState(0);
+  const defaultData = {
+    name: "",
+    businessType: "",
+    price: 0,
+  };
+
+  const [data, setData] = useState(defaultData);
+  console.log("data.businessType", data.businessType);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("tokenAdmin");
 
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${token}`, // Replace `token` with your actual bearer token
+      "Content-Type": "application/json", // Replace with the appropriate content type
+    },
+  };
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `${apiUrl}/fee-management/${id}`,
+      requestOptions
+    );
+
+    const data = await response.json();
+    setData(data.data);
+  };
+
+  useEffect(() => {
+    if (edit) {
+      fetchData();
+    }
+  }, []);
   const handleInputPrice = (event) => {
-    setPrice(event.target.value);
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      price: value,
+    }));
   };
 
   const handleChangeName = (e) => {
-    setName(e.target.value);
+    const { value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      name: value,
+    }));
   };
 
   const handleCloseModal = () => {
@@ -39,13 +75,17 @@ const ItemModal = (props) => {
   };
 
   const handleChange = (e) => {
-    setTypeBusiness(e.target.value);
+    const { value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      businessType: value,
+    }));
   };
 
   const handleSave = async (e) => {
     e.preventDefault();
 
-    if (name.length === 0 || price === 0) {
+    if (data.name.length === 0 || data.price === 0) {
       Swal.fire({
         icon: "warning",
         text: "Vui lòng nhập tên phí và giá phí!",
@@ -75,7 +115,9 @@ const ItemModal = (props) => {
           },
         });
         const request = {
-          name: name,
+          name: data.name,
+          businessType: data.businessType,
+          price: data.price,
         };
 
         const requestOptions = {
@@ -88,25 +130,80 @@ const ItemModal = (props) => {
         };
 
         const response = await fetch(
-          `${apiUrl}/keeper-account-management/register`,
+          `${apiUrl}/fee-management`,
           requestOptions
         );
 
-        const data = await response.json();
+        const dataRes = await response.json();
 
-        if (data.statusCode === 201) {
+        if (dataRes.statusCode === 201) {
           Swal.fire({
             icon: "success",
             text: "Tạo mới cước phí thành công",
           }).then((result) => {
             if (result.isConfirmed) {
-              setName("");
+              setData((prevData) => ({
+                ...prevData,
+                name: "",
+              }));
             }
           });
         } else {
           Swal.fire({
             icon: "error",
-            text: "Có lỗi khi tạo mới",
+            text: dataRes.message,
+          });
+        }
+      }
+    });
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    Swal.fire({
+      title: "Xác nhận?",
+      text: "Bạn có chắc chắn muốn xóa!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Hủy",
+      confirmButtonText: "Xác nhận!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: "info",
+          title: "Đang xử lý thông tin...",
+          text: "Vui lòng chờ trong giây lát!",
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+        const requestOptions = {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `bearer ${token}`,
+          },
+        };
+
+        const response = await fetch(
+          `${apiUrl}/fee-management/${id}`,
+          requestOptions
+        );
+
+        if (response.statusCode === 204) {
+          Swal.fire({
+            icon: "success",
+            text: "Xóa cước phí thành công",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: response.message,
           });
         }
       }
@@ -150,7 +247,7 @@ const ItemModal = (props) => {
               fullWidth
               label="Tên phí"
               type="text"
-              value={name}
+              value={data.name}
               onChange={handleChangeName}
             />
           </Grid>
@@ -170,19 +267,19 @@ const ItemModal = (props) => {
           </Grid>
           <Grid item xs={7}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Loại hinh</InputLabel>
+              <InputLabel id="demo-simple-select-label">Loại hình</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={typeBusiness}
+                value={data.businessType}
                 label="typeBusiness"
                 onChange={handleChange}
+                defaultValue={data?.businessType}
               >
                 <MenuItem fullWidth value="Doanh nghiệp" sx={{ width: "100%" }}>
                   Doanh nghiệp
                 </MenuItem>
-                <br />
-                <MenuItem fullWidth value="Nữ" sx={{ width: "100%" }}>
+                <MenuItem fullWidth value="Tư nhân" sx={{ width: "100%" }}>
                   Tư nhân
                 </MenuItem>
               </Select>
@@ -209,7 +306,7 @@ const ItemModal = (props) => {
               required
               label="Giá phí"
               type="number"
-              value={price}
+              value={data.price}
               inputProps={{
                 min: 1,
               }}
@@ -229,6 +326,11 @@ const ItemModal = (props) => {
           <Grid item>
             <CancelButton onClick={handleCloseModal} />
           </Grid>
+          {edit && (
+            <Grid item>
+              <DeleteButton onClick={handleDelete} />
+            </Grid>
+          )}
           <Grid item>
             <SaveButton onClick={handleSave} />
           </Grid>

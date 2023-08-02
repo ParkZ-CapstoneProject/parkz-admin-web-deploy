@@ -5,10 +5,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "store/modalReducer";
 import Loading from "ui-component/back-drop/Loading";
-// import SaveButton from "ui-component/buttons/save-button/SaveButton";
 import CancelButton from "ui-component/buttons/cancel-button/CancelButton";
 import UploadAvatar from "ui-component/upload-file/upload-staff/UploadAvatar";
-// import DeleteButton from "ui-component/buttons/delete-button/DeleteButton";
 
 const ItemModal = ({ modalType }) => {
   const theme = useTheme();

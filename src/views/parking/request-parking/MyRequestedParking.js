@@ -1,19 +1,24 @@
-import * as React from "react";
+import React, { useRef, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
 import SearchSection from "ui-component/search-section";
-import { Chip, Grid, Switch, Typography } from "@mui/material";
-// import Menu from "ui-component/parking/parking-all/Menu";
-import Swal from "sweetalert2";
-import SubCardStaff from "ui-component/cards/SubCardStaff";
-import CreateButton from "ui-component/buttons/create-button/CreateButton";
-import { useNavigate } from "react-router";
+import { Chip, Grid, Typography } from "@mui/material";
 import { ImFilesEmpty } from "react-icons/im";
 import SubCard from "ui-component/cards/SubCard";
 import Menu from "ui-component/staff-parking/Menu/Index";
 
 export default function MyRequestedParking(props) {
   const { rows } = props;
+  const dataGridRef = useRef(null);
+
+  useEffect(() => {
+    if (dataGridRef.current) {
+      // get the height of the DataGrid using the ref
+      const height = dataGridRef.current.clientHeight;
+      // set the height of the outer div to be the same as the DataGrid height
+      document.getElementById("outer-div").style.height = `${height}px`;
+    }
+  }, [rows]);
 
   const getCellValue = (params) => {
     return params.value == null ? false : params.value;
@@ -91,6 +96,7 @@ export default function MyRequestedParking(props) {
       width: 80,
       sortable: false,
       disableColumnMenu: true,
+      align: "center",
       renderCell: (params) => <Menu parkingId={params.id} />,
     },
   ];
@@ -105,7 +111,7 @@ export default function MyRequestedParking(props) {
         </Grid>
 
         {rows ? (
-          <div style={{ height: "500px", width: "100%" }}>
+          <div id="outer-div">
             <DataGrid
               rows={rows}
               rowHeight={70}

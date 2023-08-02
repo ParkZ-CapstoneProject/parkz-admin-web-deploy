@@ -6,8 +6,6 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import CancelButton from "ui-component/buttons/cancel-button/CancelButton";
 import SaveButton from "ui-component/buttons/save-button/SaveButton";
 import Swal from "sweetalert2";
-import { useParams } from "react-router";
-import axios from "axios";
 import UploadFileImage from "./UploadFileImage";
 
 const ItemModal = (props) => {
@@ -23,8 +21,6 @@ const ItemModal = (props) => {
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenStaff");
-  // const user = localStorage.getItem("staff"); // Set the authentication status here
-  // const staff = JSON.parse(user);
 
   const fetchData = async () => {
     const requestOptions = {

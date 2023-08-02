@@ -15,7 +15,6 @@ import CancelButton from "ui-component/buttons/cancel-button/CancelButton";
 import UploadAvatar from "ui-component/upload-file/upload-staff/UploadAvatar";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "store/modalReducer";
-// import validator from "validator";
 import Swal from "sweetalert2";
 import Loading from "ui-component/back-drop/Loading";
 
@@ -36,7 +35,6 @@ const ItemModal = ({ modalType }) => {
   };
 
   const [data, setData] = useState(defaultData);
-  // const [errorEmail, setErrorEmail] = useState(false);
   const [avatar, setAvatar] = useState("");
   const edit = true;
   const [loading, setLoading] = useState(false);
@@ -91,22 +89,6 @@ const ItemModal = ({ modalType }) => {
       }));
     }
   };
-
-  // const handleInputEmail = (event) => {
-  //   const { value } = event.target;
-
-  //   const startsWithSpace = /^\s/.test(value);
-  //   // Remove any spaces from the input value
-  //   if (!startsWithSpace) {
-  //     setData((prevData) => ({
-  //       ...prevData,
-  //       email: value,
-  //     }));
-  //     setErrorEmail(!validator.isEmail(value));
-  //   } else {
-  //     setErrorEmail(true);
-  //   }
-  // };
 
   const handleDateOfBirthChange = (event) => {
     const { value } = event.target;
@@ -271,9 +253,6 @@ const ItemModal = ({ modalType }) => {
               label="Email"
               type="email"
               value={data.email}
-              // onChange={handleInputEmail}
-              // error={errorEmail}
-              // helperText={errorEmail ? "Vui lòng nhập đúng email" : ""}
               InputProps={{
                 readOnly: true,
               }}
@@ -377,8 +356,6 @@ const ItemModal = ({ modalType }) => {
           </Grid>
         </Grid>
       </Grid>
-
-      {/* <DialogEdit open={openDialog} modalType={modalType} /> */}
     </>
   );
 };

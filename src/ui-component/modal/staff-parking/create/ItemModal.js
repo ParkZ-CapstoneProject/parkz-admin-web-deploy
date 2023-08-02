@@ -14,7 +14,6 @@ const ItemModal = (props) => {
   const { setIsOpen, setLength, isEdit, approveParkingId, setAnchorEl } = props;
   const theme = useTheme();
   const [imageList, setImageList] = useState([]);
-  console.log("imageList", imageList);
   const defaultData = {
     note: "",
     images: [],
@@ -120,7 +119,7 @@ const ItemModal = (props) => {
           },
         });
         const imageUrls = await handleUploadAllImage();
-        console.log("imageUrls", imageUrls);
+        // console.log("imageUrls", imageUrls);
         if (!isEdit) {
           handleCreateNewApprove(imageUrls);
         } else {
@@ -152,7 +151,7 @@ const ItemModal = (props) => {
       `${apiUrl}/request/approve-parkings/parking`,
       requestOptions
     );
-    console.log("response", response);
+    // console.log("response", response);
     const dataRes = await response.json();
     if (dataRes.data) {
       localStorage.setItem("newApproveId", dataRes.data);

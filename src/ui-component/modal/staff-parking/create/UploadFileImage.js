@@ -79,11 +79,6 @@ const UploadFileImage = (props) => {
 
   const handleRemove = async (file) => {
     if (file.url && images.some((img) => img.url === file.url)) {
-      const index = imageList.indexOf(file);
-      console.log("index", index);
-      // console.log("this is an image from props");
-      // console.log("file.fieldWorkParkingImgId", file.fieldWorkParkingImgId);
-      // Show a confirmation dialog before deleting the image
       const result = await Swal.fire({
         title: "Bạn có chắc chắn muốn xóa?",
         text: "Hình ảnh sẽ bị mất khi xóa!",
@@ -145,7 +140,6 @@ const UploadFileImage = (props) => {
     </div>
   );
 
-  console.log("imageList.length", imageList?.length);
   return (
     <>
       <Upload

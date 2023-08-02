@@ -10,7 +10,7 @@ import EditModalStaff from "ui-component/modal/staff-modal/edit-modal/EditModalS
 import DetailModalStaff from "ui-component/modal/staff-modal/detail-modal/DetailModalStaff";
 import DeleteModalStaff from "ui-component/modal/staff-modal/delete-modal/DeleteModalStaff";
 
-const Menu = ({ value, id }) => {
+const Menu = ({ id }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
 

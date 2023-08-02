@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import MainCard from "ui-component/cards/MainCard";
-import ParkingImage from "ui-component/parking/parking-images/ParkingImage";
-import ParkingDetailInfo from "ui-component/parking/single-parking/DetailParkInfo/ParkingDetailInfo";
-// import Tabs from "ui-component/parking/single-parking/Tabs";
-import HistoryBooking from "ui-component/parking/single-parking/HistoryParking/HistoryBooking";
-// import FloorParking from "ui-component/parking/single-parking/PhysicalModalParking/FloorParking";
 import { useLocation, useNavigate, useParams } from "react-router";
-// import RealInformation from "ui-component/parking/single-parking/RealInformation/RealInformation";
 import { Grid } from "@mui/material";
 import SaveButton from "ui-component/buttons/save-button/SaveButton";
 import ApproveParkingDetail from "ui-component/parking/approve-parking/parking-detail/ApproveParkingDetail";
 import FloorParking from "ui-component/parking/approve-parking/physical-modal-parking/FloorParking";
-// import Tabs from "ui-component/parking/single-parking/Tabs";
 import RealInformation from "ui-component/parking/approve-parking/real-information/RealInfomation";
 import Tabs from "ui-component/parking/approve-parking/Tabs";
 import Swal from "sweetalert2";
@@ -29,7 +22,7 @@ const ApproveParking = () => {
       component: <ApproveParkingDetail parkingId={parkingId} />,
     },
     {
-      label: "Thông tin xa bàn",
+      label: "Thông tin sa bàn",
       component: <FloorParking parkingId={parkingId} />,
     },
     {

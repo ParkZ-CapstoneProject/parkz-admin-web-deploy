@@ -6,13 +6,13 @@ const icons = { IconReportMoney };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
-const report = {
-  id: "report",
+const order = {
+  id: "order",
   // title: "Dashboard",
   type: "group",
   children: [
     {
-      id: "report",
+      id: "order",
       title: "Hóa đơn",
       type: "item",
       url: "/order",
@@ -22,4 +22,4 @@ const report = {
   ],
 };
 
-export default report;
+export default order;

@@ -8,8 +8,6 @@ const Business = () => {
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
-  const user = localStorage.getItem("admin"); // Set the authentication status here
-  const userData = JSON.parse(user);
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()

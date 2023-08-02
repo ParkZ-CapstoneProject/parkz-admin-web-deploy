@@ -12,7 +12,7 @@ const tabs = [
     component: <ParkingDetailInfo />,
   },
   {
-    label: "Thông tin xa bàn",
+    label: "Thông tin sa bàn",
     component: <FloorParking />,
   },
   {
@@ -26,15 +26,6 @@ const tabs = [
 ];
 
 const ParkingDetail = () => {
-  // const { id } = useParams();
-  // const [selectedOption, setSelectedOption] = useState(null);
-
-  // Function to handle radio button change
-  // const handleRadioChange = (event) => {
-  //   setSelectedOption(event.target.value);
-  // };
-  // console.log("selectedOption", selectedOption);
-  // console.log("parkingId", id);
   return (
     <>
       <MainCard title="Chi tiết bãi xe">
@@ -42,49 +33,6 @@ const ParkingDetail = () => {
           <Tabs tabs={tabs} />
         </div>
       </MainCard>
-
-      {/* <Grid
-        container
-        sx={{
-          backgroundColor: "#fff",
-          marginTop: "15px",
-          borderRadius: "12px",
-          padding: "10px",
-        }}
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Grid item>
-          <div className="radio-check">
-            <form>
-              <label>
-                <input
-                  type="radio"
-                  name="radio"
-                  value="approve"
-                  checked={selectedOption === "approve"}
-                  onChange={handleRadioChange}
-                />
-                <span>Duyệt</span>
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="radio"
-                  value="reject"
-                  checked={selectedOption === "reject"}
-                  onChange={handleRadioChange}
-                />
-                <span>Từ chối</span>
-              </label>
-            </form>
-          </div>
-        </Grid>
-        <Grid item>
-          <SaveButton />
-        </Grid>
-      </Grid> */}
     </>
   );
 };

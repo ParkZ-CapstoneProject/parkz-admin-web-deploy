@@ -5,7 +5,7 @@ import booking from "./booking";
 import admin from "./admin";
 import user from "./user";
 import business from "./business";
-import report from "./reportFee";
+import order from "./order";
 import fee from "./feeSetting";
 import parkingPending from "./parkingPending";
 import parkingRequest from "./parkingRequest";
@@ -24,7 +24,7 @@ const Menu = () => {
           parking,
           parkingPending,
           booking,
-          report,
+          order,
           fee,
         ]
       : tokenStaff

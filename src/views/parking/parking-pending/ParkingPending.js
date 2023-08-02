@@ -1,27 +1,24 @@
-import * as React from "react";
+import React, { useEffect, useRef } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
 import SearchSection from "ui-component/search-section";
-import { Chip, Grid, Switch, Typography } from "@mui/material";
-import Swal from "sweetalert2";
-import SubCardStaff from "ui-component/cards/SubCardStaff";
-import CreateButton from "ui-component/buttons/create-button/CreateButton";
-import { useNavigate } from "react-router";
+import { Chip, Grid, Typography } from "@mui/material";
 import { ImFilesEmpty } from "react-icons/im";
 import SubCard from "ui-component/cards/SubCard";
 import Menu from "ui-component/parking-pending/Menu";
 
 export default function MyParkingPending(props) {
   const { rows } = props;
+  const dataGridRef = useRef(null);
 
-  const navigate = useNavigate();
-
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
-  const token = localStorage.getItem("token");
-
-  const getCellValue = (params) => {
-    return params.value == null ? false : params.value;
-  };
+  useEffect(() => {
+    if (dataGridRef.current) {
+      // get the height of the DataGrid using the ref
+      const height = dataGridRef.current.clientHeight;
+      // set the height of the outer div to be the same as the DataGrid height
+      document.getElementById("outer-div").style.height = `${height}px`;
+    }
+  }, [rows]);
 
   const renderCellStatus = (params) => {
     if (params.value !== null) {
@@ -73,6 +70,7 @@ export default function MyParkingPending(props) {
       width: 100,
       sortable: false,
       disableColumnMenu: true,
+      align: "center",
       renderCell: (params) => (
         <Menu id={params.id} parkingId={params.row.parkingId} />
       ),
@@ -89,10 +87,11 @@ export default function MyParkingPending(props) {
         </Grid>
 
         {rows ? (
-          <div style={{ height: "500px", width: "100%" }}>
+          <div id="outer-div">
             <DataGrid
               rows={rows}
               rowHeight={70}
+              autoHeight
               getRowId={(row) => row.approveParkingId}
               columns={columns}
               initialState={{
