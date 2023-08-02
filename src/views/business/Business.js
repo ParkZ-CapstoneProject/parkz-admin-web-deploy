@@ -3,12 +3,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
 import SearchSection from "ui-component/search-section";
 import { Grid, Skeleton, Typography } from "@mui/material";
-// import Menu from "ui-component/staff/Menu";
-import CreateButton from "ui-component/buttons/create-button/CreateButton";
-import SubCardStaff from "ui-component/cards/SubCardStaff";
-import { useDispatch } from "react-redux";
-import { openModal } from "store/modalReducer";
-import CreateModalStaff from "ui-component/modal/staff-modal/create-modal/CreateModalStaff";
 import SubCard from "ui-component/cards/SubCard";
 import Loading from "ui-component/back-drop/Loading";
 import { ImFilesEmpty } from "react-icons/im";
@@ -65,8 +59,6 @@ export default function MyBusiness(props) {
     }
   }, [rows]);
 
-  const dispatch = useDispatch();
-
   if (loading) {
     // Render the Skeleton components or any other loading indicator
     return (
@@ -88,22 +80,13 @@ export default function MyBusiness(props) {
     );
   }
 
-  const handleOpenModalCreate = (modalType) => {
-    dispatch(openModal(modalType));
-  };
-
   return (
     <>
       <MainCard title={"Doanh nghiệp"}>
         <Grid item xs={12}>
-          <SubCardStaff
-            startComponent={<SearchSection />}
-            endComponent={
-              <CreateButton
-                onClick={() => handleOpenModalCreate("createModalStaff")}
-              />
-            }
-          ></SubCardStaff>
+          <SubCard>
+            <SearchSection />
+          </SubCard>
         </Grid>
         {rows ? (
           <div id="outer-div">
@@ -138,8 +121,6 @@ export default function MyBusiness(props) {
           </>
         )}
       </MainCard>
-
-      <CreateModalStaff modalType="createModalStaff" />
     </>
   );
 }
