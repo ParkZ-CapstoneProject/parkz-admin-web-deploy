@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
-import { Box, Drawer, useMediaQuery } from "@mui/material";
+import { Box, Divider, Drawer, useMediaQuery } from "@mui/material";
 
 // third-party
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -34,6 +34,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
             height: !matchUpMd ? "calc(100vh - 56px)" : "calc(100vh - 88px)",
             paddingLeft: "16px",
             paddingRight: "16px",
+            // color: "#fff",
           }}
         >
           <MenuList />
@@ -55,7 +56,11 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
   return (
     <Box
       component="nav"
-      sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : "auto" }}
+      sx={{
+        flexShrink: { md: 0 },
+        width: matchUpMd ? drawerWidth : "auto",
+        color: "#fff",
+      }}
       aria-label="mailbox folders"
     >
       <Drawer
@@ -67,11 +72,13 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
         sx={{
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            background: theme.palette.background.default,
-            color: theme.palette.text.primary,
+            background: theme.palette.common.black,
+            color: "#fff",
             borderRight: "none",
+            paddingTop: "20px",
+            // borderRadius: "3px",
             [theme.breakpoints.up("md")]: {
-              top: "88px",
+              top: "80px",
             },
           },
         }}

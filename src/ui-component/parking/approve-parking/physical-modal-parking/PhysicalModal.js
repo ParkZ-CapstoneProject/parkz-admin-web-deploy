@@ -2,6 +2,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import carIcon from "../../../../assets/images/Car.svg";
 import { Image, Layer, Rect, Stage, Text } from "react-konva";
+import { Box, Grid, Typography } from "@mui/material";
 
 const PhysicalModal = ({ floorIndex, listCarSlots }) => {
   const slotWidth = 150;
@@ -11,7 +12,8 @@ const PhysicalModal = ({ floorIndex, listCarSlots }) => {
 
   const [carSlotsCurrent, setCarSlotsCurrent] = useState([]);
 
-  const numCarRows = Math.max(...listCarSlots?.map((slot) => slot.rowIndex)) + 1;
+  const numCarRows =
+    Math.max(...listCarSlots?.map((slot) => slot.rowIndex)) + 1;
   const numCarCols =
     Math.max(...listCarSlots?.map((slot) => slot.columnIndex)) + 1;
 
@@ -52,6 +54,7 @@ const PhysicalModal = ({ floorIndex, listCarSlots }) => {
       y: slot.rowIndex * (slotHeight + spacing) + stagePadding,
       name: slot.name.substring(0, 4),
       isDragging: false,
+      type: slot.isBackup,
     }));
     setCarSlotsCurrent(calculatedCarSlots);
 
@@ -66,6 +69,44 @@ const PhysicalModal = ({ floorIndex, listCarSlots }) => {
     <div className="scrollable-container">
       <div className="stage-container">
         <div className="scrollable-stage">
+          <Grid
+            container
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            sx={{ padding: "20px", width: "50%" }}
+          >
+            <Grid item>
+              <Box
+                sx={{
+                  width: 60,
+                  height: 50,
+                  backgroundColor: "#145365",
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1" fontSize={15}>
+                Vị trí dự phòng
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Box
+                sx={{
+                  width: 60,
+                  height: 50,
+                  backgroundColor: "#1939B7",
+                  padding: "10px",
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1" fontSize={15}>
+                Vị trí hiện thực
+              </Typography>
+            </Grid>
+          </Grid>
+
           {carSlotsCurrent ? (
             <Stage width={stageWidth} height={stageHeight}>
               <Layer>
@@ -76,20 +117,23 @@ const PhysicalModal = ({ floorIndex, listCarSlots }) => {
                       y={slot.y}
                       width={slotWidth}
                       height={slotHeight}
+                      fill={slot.type ? "#145365" : "#1939B7"}
                       stroke="black"
-                      fill="lightblue"
                       strokeWidth={1}
+                      // draggable={!slot.isDragging && edit}
+                      // onDragStart={() => handleDragStart(slot.id)}
+                      // onDragEnd={(e) => handleDragEnd(e, slot.id)}
                       dash={[5, 5]}
                       cornerRadius={10}
                     />
                     <Text
                       x={slot.x + 8}
                       y={slot.y - 25}
-                      fill="#5e35b1"
+                      fill="#ffd700"
                       width={slotWidth - 10}
                       height={slotHeight - 10}
                       text={slot.name}
-                      fontSize={14}
+                      fontSize={15}
                       align="center"
                       verticalAlign="middle"
                       fontStyle="bold"

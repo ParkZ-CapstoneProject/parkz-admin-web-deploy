@@ -11,7 +11,7 @@ const RequestedParking = (props) => {
   const [loading, setLoading] = useState(false);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
-  const signalRUrl = process.env.REACT_APP_BASE_URL_SIGNALR;
+  const signalRUrl = "https://parkzserver-001-site1.btempurl.com/parkz";
   const token = localStorage.getItem("tokenStaff");
   // const staff = localStorage.getItem("staff"); // Set the authentication status here
   // const staffData = JSON.parse(staff);

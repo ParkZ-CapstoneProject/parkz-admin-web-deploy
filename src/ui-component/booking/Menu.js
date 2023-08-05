@@ -1,22 +1,12 @@
 import { IconButton, List, ListItem, Popover, Typography } from "@mui/material";
 import { useState } from "react";
 import { MoreVert } from "@mui/icons-material";
-import CancelIcon from "@mui/icons-material/Cancel";
-import CheckIcon from "@mui/icons-material/Check";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useDispatch } from "react-redux";
-import {
-  openModal,
-  setAccept,
-  setBookingId,
-  setCancel,
-  setCheckIn,
-  setCheckOut,
-} from "store/modalReducer";
+import { openModal, setBookingId } from "store/modalReducer";
 import ModalBooking from "ui-component/modal/booking/ModalBooking";
 
-const Menu = ({ value, id }) => {
+const Menu = ({ id }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
 
@@ -32,37 +22,37 @@ const Menu = ({ value, id }) => {
   };
 
   const handleOpenModalAccept = (modalType) => {
-    console.log("modalType", modalType);
-    dispatch(setAccept(true));
-    dispatch(setCheckIn(false));
-    dispatch(setCheckOut(false));
-    dispatch(setCancel(false));
+    // console.log("modalType", modalType);
+    // dispatch(setAccept(true));
+    // dispatch(setCheckIn(false));
+    // dispatch(setCheckOut(false));
+    // dispatch(setCancel(false));
     dispatch(openModal(modalType));
   };
 
-  const handleOpenModalCheckIn = (modalType) => {
-    dispatch(setAccept(false));
-    dispatch(setCheckIn(true));
-    dispatch(setCheckOut(false));
-    dispatch(setCancel(false));
-    dispatch(openModal(modalType));
-  };
+  // const handleOpenModalCheckIn = (modalType) => {
+  //   dispatch(setAccept(false));
+  //   dispatch(setCheckIn(true));
+  //   dispatch(setCheckOut(false));
+  //   dispatch(setCancel(false));
+  //   dispatch(openModal(modalType));
+  // };
 
-  const handleOpenModalCheckOut = (modalType) => {
-    dispatch(setAccept(false));
-    dispatch(setCheckIn(false));
-    dispatch(setCheckOut(true));
-    dispatch(setCancel(false));
-    dispatch(openModal(modalType));
-  };
+  // const handleOpenModalCheckOut = (modalType) => {
+  //   dispatch(setAccept(false));
+  //   dispatch(setCheckIn(false));
+  //   dispatch(setCheckOut(true));
+  //   dispatch(setCancel(false));
+  //   dispatch(openModal(modalType));
+  // };
 
-  const handleOpenModalCancel = (modalType) => {
-    dispatch(setAccept(false));
-    dispatch(setCheckIn(false));
-    dispatch(setCheckOut(false));
-    dispatch(setCancel(true));
-    dispatch(openModal(modalType));
-  };
+  // const handleOpenModalCancel = (modalType) => {
+  //   dispatch(setAccept(false));
+  //   dispatch(setCheckIn(false));
+  //   dispatch(setCheckOut(false));
+  //   dispatch(setCancel(true));
+  //   dispatch(openModal(modalType));
+  // };
 
   return (
     <>
@@ -84,12 +74,12 @@ const Menu = ({ value, id }) => {
       >
         <List sx={{ width: "130px" }}>
           <ListItem onClick={() => handleOpenModalAccept("modalBooking")}>
-            <CheckIcon sx={{ marginRight: "3%", color: "#2196f3" }} />
+            <RemoveRedEyeIcon sx={{ marginRight: "3%", color: "#2196f3" }} />
             <Typography color="primary" variant="subtitle1">
-              Xác nhận
+              Chi tiết
             </Typography>
           </ListItem>
-          <ListItem onClick={() => handleOpenModalCheckIn("modalBooking")}>
+          {/* <ListItem onClick={() => handleOpenModalCheckIn("modalBooking")}>
             <CheckCircleIcon sx={{ marginRight: "3%", color: "#673ab7" }} />
             <Typography color="secondary" variant="subtitle1">
               Check in
@@ -106,7 +96,7 @@ const Menu = ({ value, id }) => {
             <Typography color="error" variant="subtitle1">
               Hủy
             </Typography>
-          </ListItem>
+          </ListItem> */}
         </List>
       </Popover>
 

@@ -12,6 +12,9 @@ import MinimalLayout from "layout/MinimalLayout";
 const AuthLogin = Loadable(
   lazy(() => import("views/pages/authentication/authentication/Login2"))
 );
+const AuthLoginAdmin = Loadable(
+  lazy(() => import("views/pages/authentication/authentication/Login"))
+);
 // const AuthRegister = Loadable(
 //   lazy(() => import("views/pages/authentication/authentication/Register"))
 // );
@@ -69,6 +72,10 @@ const AuthenticationRoutes = {
     {
       path: "",
       element: <AuthLogin />,
+    },
+    {
+      path: "login2",
+      element: <AuthLoginAdmin />,
     },
     {
       path: "register",

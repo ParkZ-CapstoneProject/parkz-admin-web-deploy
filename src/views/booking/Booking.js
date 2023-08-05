@@ -11,11 +11,14 @@ import { useEffect } from "react";
 // import Loading from "ui-component/back-drop/Loading";
 
 const renderAvatarCell = (params) => {
-  return <Avatar src={params.value} alt="avatar" />;
-};
-
-const getCellValue = (params) => {
-  return params.value ? params.value : "-------";
+  return params.value ? (
+    <Avatar src={params.value} alt="avatar" />
+  ) : (
+    <Avatar
+      src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"
+      alt="avatar"
+    />
+  );
 };
 
 const renderCellStatus = (params) => {
@@ -49,75 +52,95 @@ const renderCellStatus = (params) => {
 };
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
+  {
+    field: "bookingId",
+    headerName: "ID",
+    width: 70,
+    valueGetter: (params) => `${params.row.bookingDtoForAdmin.bookingId}`,
+  },
   {
     field: "avatar",
     headerName: "Ảnh",
     width: 80,
     renderCell: renderAvatarCell,
     sortable: false,
+    valueGetter: (params) =>
+      `${
+        params.row.userForGetAllBookingForAdminResponse.avatar ? (
+          <Avatar
+            src={params.row.userForGetAllBookingForAdminResponse.avatar}
+          />
+        ) : (
+          <Avatar
+            src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"
+            alt="avatar"
+          />
+        )
+      }`,
   },
   {
     field: "name",
     headerName: "Tên khách hàng",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
-    width: 170,
-    valueGetter: (params) => `${params.row.name || ""}`,
-  },
-  { field: "position", headerName: "Vị trí", width: 100 },
-  {
-    field: "startTime",
-    headerName: "Thời gian đặt",
     width: 200,
-    valueGetter: getCellValue,
-    renderCell: (params) =>
-      `${params.row.startTime || ""} - ${params.row.endTime || ""}`,
+    valueGetter: (params) =>
+      `${params.row.userForGetAllBookingForAdminResponse.name || "----"}`,
+  },
+  {
+    field: "floorName",
+    headerName: "Tầng",
+    width: 120,
+    valueGetter: (params) =>
+      `${params.row.floorDtoForAdmin.floorName || "----"}`,
+  },
+  {
+    field: "slotsName",
+    headerName: "Vị trí",
+    width: 120,
+    valueGetter: (params) => `${params.row.slotDtoForAdmin.name || "----"}`,
   },
   {
     field: "totalPrice",
     headerName: "Giá",
     // type: "number",
     width: 100,
+    valueGetter: (params) =>
+      `${params.row.bookingDtoForAdmin.totalPrice || "----"}`,
   },
-  { field: "phone", headerName: "Số điện thoại", width: 130 },
-  { field: "licensePlate", headerName: "Biển số xe", width: 110 },
-  { field: "parkingName", headerName: "Bãi xe", width: 130 },
+  {
+    field: "phone",
+    headerName: "Số điện thoại",
+    width: 130,
+    valueGetter: (params) =>
+      `${params.row.userForGetAllBookingForAdminResponse.phone || "----"}`,
+  },
+  {
+    field: "parkingDtoForAdmin.name",
+    headerName: "Bãi xe",
+    width: 200,
+    valueGetter: (params) => `${params.row.parkingDtoForAdmin.name || "----"}`,
+  },
   {
     field: "checkInTime",
     headerName: "Giờ vào",
     width: 120,
-    valueGetter: getCellValue,
+    valueGetter: (params) =>
+      `${params.row.bookingDtoForAdmin.checkInTime || "----"}`,
   },
   {
     field: "checkOutTime",
     headerName: "Giờ ra",
     width: 120,
-    valueGetter: getCellValue,
-  },
-  {
-    field: "paymentMethod",
-    headerName: "Thanh toán",
-    width: 130,
-    valueGetter: getCellValue,
-  },
-  {
-    field: "guestName",
-    headerName: "Người đặt hộ",
-    width: 170,
-    valueGetter: getCellValue,
-  },
-  {
-    field: "guestPhone",
-    headerName: "SĐT đặt hộ",
-    width: 130,
-    valueGetter: getCellValue,
+    valueGetter: (params) =>
+      `${params.row.bookingDtoForAdmin.checkOutTime || "----"}`,
   },
   {
     field: "status",
     headerName: "Trạng thái",
     width: 120,
-    valueGetter: getCellValue,
+    valueGetter: (params) =>
+      `${params.row.bookingDtoForAdmin.status || "----"}`,
     renderCell: renderCellStatus,
     sortable: false,
     disableColumnMenu: true,
@@ -129,7 +152,7 @@ const columns = [
     sortable: false,
     disableColumnMenu: true,
     align: "center",
-    renderCell: (params) => <Menu value={params.value} id={params.id} />,
+    renderCell: (params) => <Menu id={params.id} />,
   },
 ];
 
@@ -179,6 +202,7 @@ export default function DataTable(props) {
           <DataGrid
             rows={rows}
             rowHeight={70}
+            getRowId={(row) => row.bookingDtoForAdmin.bookingId}
             autoHeight
             columns={columns}
             initialState={{

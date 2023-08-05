@@ -19,7 +19,7 @@ const AllSendRequest = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
-  const signalRUrl = process.env.REACT_APP_BASE_URL_SIGNALR;
+  const signalRUrl = "https://parkzserver-001-site1.btempurl.com/parkz";
   const token = localStorage.getItem("tokenStaff");
   // const user = localStorage.getItem("admin"); // Set the authentication status here
   // const userData = JSON.parse(user);

@@ -93,13 +93,13 @@ const MainLayout = () => {
         color="inherit"
         elevation={0}
         sx={{
-          bgcolor: theme.palette.background.default,
+          bgcolor: "theme.palette.background.default",
           transition: leftDrawerOpened
             ? theme.transitions.create("width")
             : "none",
         }}
       >
-        <Toolbar style={{ paddingBottom: "0", paddingTop: "8px" }}>
+        <Toolbar style={{ paddingBottom: "0", paddingTop: "2px" }}>
           <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
         </Toolbar>
       </AppBar>

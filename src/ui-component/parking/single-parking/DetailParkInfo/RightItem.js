@@ -47,7 +47,7 @@ const RightItem = ({ data }) => {
       <Grid container direction="column" spacing={5}>
         <GridItem
           leftText="Trạng thái"
-          rightText={data?.isFull ? "Còn chỗ" : "Hết chỗ"}
+          rightText={data?.isFull ? "Hết chỗ" : "Còn chỗ"}
           color={theme.palette.primary.main}
           active={data?.isFull}
         />
@@ -60,7 +60,13 @@ const RightItem = ({ data }) => {
         />
         <GridItem
           leftText="Đánh giá"
-          rightText={<Rating value={data?.stars} readOnly />}
+          rightText={
+            data?.stars ? (
+              <Rating value={data?.stars} readOnly />
+            ) : (
+              "Chưa có đánh giá"
+            )
+          }
           color={theme.palette.primary.main}
         />
         <Grid item>

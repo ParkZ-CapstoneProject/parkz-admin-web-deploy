@@ -289,7 +289,7 @@
 }
 
 canvas {
-  background: rgba(211, 211, 211, 0.655) !important;
+  background: rgba(120, 89, 89, 0.431) !important;
   border-radius: 10px !important;
 }
 
@@ -375,4 +375,25 @@ canvas {
   margin-top: -0.3em;
   transition: 0.25s ease;
   box-shadow: inset 0 0 0 0.125em #00005c;
+}
+
+.css-1ouhze6-MuiButtonBase-root-MuiButton-root {
+  background: #5e35b1;
+  border-radius: 18px;
+}
+
+.css-1ouhze6-MuiButtonBase-root-MuiButton-root:hover {
+  outline: 3px solid #5e35b1; /* Sets the outline style */
+  outline-offset: 1px; /* Sets the outline offset */
+}
+
+.css-14aglok-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
+  background-color: #fff;
+}
+
+.css-14aglok-MuiButtonBase-root-MuiListItemButton-root.Mui-selected
+  .css-1nymi19-MuiListItemIcon-root {
+  svg {
+    color: #000 !important;
+  }
 }

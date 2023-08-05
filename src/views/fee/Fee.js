@@ -29,7 +29,7 @@ const Fee = () => {
     setData(data.data);
   };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   useEffect(() => {
     fetchData();
@@ -58,6 +58,7 @@ const Fee = () => {
           spacing={15}
           justifyContent="center"
           alignItems="center"
+          padding={5}
         >
           <Grid item>
             <FeeCardBus

@@ -77,7 +77,7 @@ export const Layout = (props) => {
               color={theme.palette.secondary.light}
               variant="subtitle1"
             >
-              Ứng dụng đặt bãi gửi xe uy tín, chất lượng
+              Ứng dụng đặt vị trí gửi xe uy tín, chất lượng
             </Typography>
             <img alt="" src={image} />
           </Box>

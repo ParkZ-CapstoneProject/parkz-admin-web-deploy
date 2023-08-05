@@ -1,15 +1,10 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-
 // material-ui
 import { useTheme } from "@mui/material/styles";
 import {
   Box,
   Button,
-  Checkbox,
-  Divider,
   FormControl,
-  FormControlLabel,
   FormHelperText,
   Grid,
   IconButton,
@@ -32,6 +27,10 @@ import AnimateButton from "ui-component/extend/AnimateButton";
 // assets
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { updateTokenAdmin, updateTokenStaff } from "store/tokenSlice";
+import { useNavigate } from "react-router";
 
 // import Google from "assets/images/icons/social-google.svg";
 
@@ -41,14 +40,83 @@ const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
   const scriptedRef = useScriptRef();
   // const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
-  const customization = useSelector((state) => state.customization);
-  const [checked, setChecked] = useState(true);
-
-  // const googleHandler = async () => {
-  //   console.error("Login");
-  // };
-
   const [showPassword, setShowPassword] = useState(false);
+
+  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = async (requestBody) => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    };
+
+    Swal.fire({
+      icon: "info",
+      title: "Đang xử lý thông tin...",
+      text: "Vui lòng chờ trong giây lát!",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    try {
+      fetch(`${apiUrl}/admin-authentication`, requestOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          const res = data;
+
+          if (res.data === null) {
+            Swal.close();
+
+            Swal.fire({
+              icon: "error",
+              title: "Đăng nhập thất bại",
+              text: res.message,
+            });
+          } else {
+            const parts = data.data.token.split(".");
+
+            // Decode the payload using the base64-decoding function
+            const user = JSON.parse(atob(parts[1]));
+
+            if (user.role === "Admin") {
+              localStorage.setItem("tokenAdmin", data.data.token);
+              localStorage.setItem("admin", JSON.stringify(user));
+              localStorage.removeItem("tokenStaff");
+              localStorage.removeItem("staff");
+              dispatch(updateTokenAdmin(data.data.token));
+              Swal.close();
+              navigate("/dashboard");
+            } else {
+              localStorage.removeItem("tokenAdmin");
+              localStorage.removeItem("admin");
+              localStorage.setItem("tokenStaff", data.data.token);
+              localStorage.setItem("staff", JSON.stringify(user));
+              dispatch(updateTokenStaff(data.data.token));
+              Swal.close();
+              navigate("/request");
+              window.location.reload();
+            }
+          }
+          // console.log("res", res);
+        });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        text: error,
+      });
+    }
+  };
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -60,63 +128,6 @@ const FirebaseLogin = ({ ...others }) => {
   return (
     <>
       <Grid container direction="column" justifyContent="center" spacing={2}>
-        {/* <Grid item xs={12}>
-          <AnimateButton>
-            <Button
-              disableElevation
-              fullWidth
-              onClick={googleHandler}
-              size="large"
-              variant="outlined"
-              sx={{
-                color: "grey.700",
-                backgroundColor: theme.palette.grey[50],
-                borderColor: theme.palette.grey[100],
-              }}
-            >
-              <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>
-                <img
-                  src={Google}
-                  alt="google"
-                  width={16}
-                  height={16}
-                  style={{ marginRight: matchDownSM ? 8 : 16 }}
-                />
-              </Box>
-              Sign in with Google
-            </Button>
-          </AnimateButton>
-        </Grid> */}
-        <Grid item xs={12}>
-          <Box
-            sx={{
-              alignItems: "center",
-              display: "flex",
-            }}
-          >
-            <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
-
-            <Button
-              variant="outlined"
-              sx={{
-                cursor: "unset",
-                m: 2,
-                py: 0.5,
-                px: 7,
-                borderColor: `${theme.palette.grey[100]} !important`,
-                color: `${theme.palette.grey[900]}!important`,
-                fontWeight: 500,
-                borderRadius: `${customization.borderRadius}px`,
-              }}
-              disableRipple
-              disabled
-            >
-              OR
-            </Button>
-
-            <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
-          </Box>
-        </Grid>
         <Grid
           item
           xs={12}
@@ -125,32 +136,33 @@ const FirebaseLogin = ({ ...others }) => {
           justifyContent="center"
         >
           <Box sx={{ mb: 2 }}>
-            <Typography variant="subtitle1">
-              Sign in with Email address
-            </Typography>
+            <Typography variant="subtitle1">Đăng nhập với Email</Typography>
           </Box>
         </Grid>
       </Grid>
 
       <Formik
         initialValues={{
-          email: "info@codedthemes.com",
-          password: "123456",
+          email: "",
+          password: "",
           submit: null,
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()
-            .email("Must be a valid email")
+            .email("Vui lòng nhập Email hợp lệ")
             .max(255)
-            .required("Email is required"),
-          password: Yup.string().max(255).required("Password is required"),
+            .required("Vui lòng nhập Email"),
+          password: Yup.string().max(255).required("Vui lòng nhập Password"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            if (scriptedRef.current) {
-              setStatus({ success: true });
-              setSubmitting(false);
-            }
+            const requestBody = {
+              email: values.email,
+              password: values.password,
+            };
+            await handleLogin(requestBody);
+            setStatus({ success: true });
+            setSubmitting(false);
           } catch (err) {
             console.error(err);
             if (scriptedRef.current) {
@@ -177,7 +189,7 @@ const FirebaseLogin = ({ ...others }) => {
               sx={{ ...theme.typography.customInput }}
             >
               <InputLabel htmlFor="outlined-adornment-email-login">
-                Email Address / Username
+                Email
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-email-login"
@@ -186,7 +198,7 @@ const FirebaseLogin = ({ ...others }) => {
                 name="email"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                label="Email Address / Username"
+                label="Email"
                 inputProps={{}}
               />
               {touched.email && errors.email && (
@@ -205,7 +217,7 @@ const FirebaseLogin = ({ ...others }) => {
               sx={{ ...theme.typography.customInput }}
             >
               <InputLabel htmlFor="outlined-adornment-password-login">
-                Password
+                Mật khẩu
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password-login"
@@ -242,26 +254,14 @@ const FirebaseLogin = ({ ...others }) => {
             <Stack
               direction="row"
               alignItems="center"
-              justifyContent="space-between"
-              spacing={1}
+              justifyContent="flex-end"
             >
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={checked}
-                    onChange={(event) => setChecked(event.target.checked)}
-                    name="checked"
-                    color="primary"
-                  />
-                }
-                label="Remember me"
-              />
               <Typography
                 variant="subtitle1"
                 color="secondary"
                 sx={{ textDecoration: "none", cursor: "pointer" }}
               >
-                Forgot Password?
+                Quên mật khẩu?
               </Typography>
             </Stack>
             {errors.submit && (
@@ -280,8 +280,9 @@ const FirebaseLogin = ({ ...others }) => {
                   type="submit"
                   variant="contained"
                   color="secondary"
+                  // sx={{ borderRadius: "10px" }}
                 >
-                  Sign in
+                  Đăng nhập
                 </Button>
               </AnimateButton>
             </Box>

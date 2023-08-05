@@ -1,15 +1,13 @@
-import { Link } from "react-router-dom";
-
 // material-ui
 import { useTheme } from "@mui/material/styles";
-import { Divider, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
+import { Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 
 // project imports
 import AuthWrapper1 from "../AuthWrapper1";
 import AuthCardWrapper from "../AuthCardWrapper";
 import AuthLogin from "../auth-forms/AuthLogin";
 import Logo from "ui-component/Logo";
-// import AuthFooter from "ui-component/cards/AuthFooter";
+import logo from "../../../../assets/2.svg";
 
 // assets
 
@@ -45,11 +43,11 @@ const Login = () => {
                   <Grid
                     item
                     sx={{ mb: 3 }}
-                    style={{ padding: "0", marginLeft: "6%s" }}
+                    style={{ padding: "0", marginLeft: "6%" }}
                   >
-                    <Logo />
+                    <img src={logo} alt="logo" width={200} height={200} />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sx={{ marginTop: "-6%" }}>
                     <Grid
                       container
                       direction={matchDownSM ? "column-reverse" : "row"}
@@ -67,42 +65,14 @@ const Login = () => {
                             gutterBottom
                             variant={matchDownSM ? "h3" : "h2"}
                           >
-                            Chào mừng
+                            Chào mừng đăng nhập
                           </Typography>
-                          {/* <Typography
-                            variant="caption"
-                            fontSize="16px"
-                            textAlign={matchDownSM ? "center" : "inherit"}
-                          >
-                            Enter your credentials to continue
-                          </Typography> */}
                         </Stack>
                       </Grid>
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
                     <AuthLogin />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Divider />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid
-                      item
-                      container
-                      direction="column"
-                      alignItems="center"
-                      xs={12}
-                    >
-                      <Typography
-                        component={Link}
-                        to="/pages/register/register3"
-                        variant="subtitle1"
-                        sx={{ textDecoration: "none" }}
-                      >
-                        Don&apos;t have an account?
-                      </Typography>
-                    </Grid>
                   </Grid>
                 </Grid>
               </AuthCardWrapper>

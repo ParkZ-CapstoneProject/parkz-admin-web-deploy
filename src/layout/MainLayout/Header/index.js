@@ -23,28 +23,37 @@ const Header = ({ handleLeftDrawerToggle }) => {
       {/* logo & toggler button */}
       <Box
         sx={{
-          width: 228,
+          width: 260,
           display: "flex",
+          marginTop: "-2px",
+          marginLeft: "-24px",
           [theme.breakpoints.down("md")]: {
             width: "auto",
           },
+          bgcolor: theme.palette.common.black,
         }}
       >
         <Box
           component="span"
-          sx={{ display: { xs: "none", md: "block" }, flexGrow: 1 }}
+          sx={{
+            display: { xs: "none", md: "block" },
+            flexGrow: 1,
+            textAlign: "center",
+          }}
         >
           <LogoSection />
         </Box>
-        <ButtonBase sx={{ borderRadius: "12px", overflow: "hidden" }}>
+        <ButtonBase
+          sx={{ borderRadius: "12px", overflow: "hidden", padding: "10px" }}
+        >
           <Avatar
             variant="rounded"
             sx={{
               ...theme.typography.commonAvatar,
               ...theme.typography.mediumAvatar,
               transition: "all .2s ease-in-out",
-              background: theme.palette.secondary.light,
-              color: theme.palette.secondary.dark,
+              background: theme.palette.common.black,
+              color: theme.palette.primary.light,
               "&:hover": {
                 background: theme.palette.secondary.dark,
                 color: theme.palette.secondary.light,
@@ -53,7 +62,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             onClick={handleLeftDrawerToggle}
             color="inherit"
           >
-            <IconMenu2 stroke={1.5} size="1.3rem" />
+            <IconMenu2 stroke={2.2} size="2.0rem" />
           </Avatar>
         </ButtonBase>
       </Box>
