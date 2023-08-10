@@ -44,7 +44,13 @@ const UploadAvatar = (props) => {
   }
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <>
+        <BoxUpload>
+          <Spinner />
+        </BoxUpload>
+      </>
+    );
   }
 
   return (
