@@ -22,7 +22,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "35%",
-  height: "75%",
+  height: "63%",
   bgcolor: "background.paper",
   // border: "1px solid #000",
   borderRadius: "5px",
@@ -39,9 +39,9 @@ const ChangePassword = ({ isOpen, handleClose }) => {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const token = localStorage.getItem("tokenAdmin");
-  // const user = localStorage.getItem("user"); // Set the authentication status here
-  // const userData = JSON.parse(user);
+  const token = localStorage.getItem("tokenStaff");
+  const user = localStorage.getItem("staff"); // Set the authentication status here
+  const userData = JSON.parse(user);
 
   // console.log("password", password);
 
@@ -81,98 +81,98 @@ const ChangePassword = ({ isOpen, handleClose }) => {
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
 
-  // const requestBody = {
-  //   managerId: userData._id,
-  //   oldPassword: oldPassword,
-  //   newPassword: password,
-  // };
+  const requestBody = {
+    userId: userData._id,
+    oldPassword: oldPassword,
+    newPassword: password,
+  };
 
-  // const requestOptions = {
-  //   method: "PUT",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Authorization: `bearer ${token}`,
-  //   },
-  //   body: JSON.stringify(requestBody),
-  // };
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${token}`,
+    },
+    body: JSON.stringify(requestBody),
+  };
 
-  // const handleSave = (e) => {
-  //   e.preventDefault();
+  const handleSave = (e) => {
+    e.preventDefault();
 
-  //   if (
-  //     password.trim() === "" ||
-  //     oldPassword.trim() === "" ||
-  //     confirmPassword.trim() === ""
-  //   ) {
-  //     Swal.fire({
-  //       icon: "warning",
-  //       title: "Nhập tất cả ô nhập",
-  //       customClass: {
-  //         container: "swal-custom", // Apply the custom class to the Swal container
-  //       },
-  //     });
-  //     return;
-  //   }
+    if (
+      password.trim() === "" ||
+      oldPassword.trim() === "" ||
+      confirmPassword.trim() === ""
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Nhập tất cả ô nhập",
+        customClass: {
+          container: "swal-custom", // Apply the custom class to the Swal container
+        },
+      });
+      return;
+    }
 
-  //   Swal.fire({
-  //     title: "Xác nhận?",
-  //     text: "Bạn có chắc chắn muốn thay đổi!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     cancelButtonText: "Hủy",
-  //     confirmButtonText: "Xác nhận!",
-  //     customClass: {
-  //       container: "swal-custom", // Apply the custom class to the Swal container
-  //     },
-  //   })
-  //     .then((result) => {
-  //       // Handle SweetAlert2 dialog result
-  //       if (result.isConfirmed) {
-  //         fetch(`${apiUrl}/my-manager-account/${userData._id}`, requestOptions)
-  //           .then((response) => {
-  //             if (!response.ok) {
-  //               throw new Error("Network response was not ok");
-  //             }
-  //             //   return response.json();
-  //           })
-  //           .then((data) => {
-  //             Swal.fire({
-  //               icon: "success",
-  //               title: "Thành công",
-  //               text: "Mật khẩu của bạn đã được thay đổi",
-  //               customClass: {
-  //                 container: "swal-custom", // Apply the custom class to the Swal container
-  //               },
-  //             });
-  //             setPassword("");
-  //             setOldPassword("");
-  //             setConfirmPassword("");
-  //             handleClose();
-  //           })
-  //           .catch((error) => {
-  //             // Handle any errors
-  //             console.error(error);
-  //             Swal.fire({
-  //               icon: "error",
-  //               title: "Lỗi xảy ra",
-  //               text: "Mật khẩu cũ không chính xác. Vui lòng nhập lại!!!",
-  //               customClass: {
-  //                 container: "swal-custom", // Apply the custom class to the Swal container
-  //               },
-  //             });
-  //           });
-  //       }
-  //     })
-  //     .then(() => {
-  //       // Set the z-index of the Swal container to be higher than the Modal's z-index
-  //       const swalContainer = document.querySelector(".swal-custom");
-  //       if (swalContainer) {
-  //         swalContainer.style.zIndex = theme.zIndex.modal + 1;
-  //       }
-  //     });
-  // };
+    Swal.fire({
+      title: "Xác nhận?",
+      text: "Bạn có chắc chắn muốn thay đổi!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Hủy",
+      confirmButtonText: "Xác nhận!",
+      customClass: {
+        container: "swal-custom", // Apply the custom class to the Swal container
+      },
+    })
+      .then((result) => {
+        // Handle SweetAlert2 dialog result
+        if (result.isConfirmed) {
+          fetch(`${apiUrl}/my-staff-account/${userData._id}`, requestOptions)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+              }
+              //   return response.json();
+            })
+            .then((data) => {
+              Swal.fire({
+                icon: "success",
+                title: "Thành công",
+                text: "Mật khẩu của bạn đã được thay đổi",
+                customClass: {
+                  container: "swal-custom", // Apply the custom class to the Swal container
+                },
+              });
+              setPassword("");
+              setOldPassword("");
+              setConfirmPassword("");
+              handleClose();
+            })
+            .catch((error) => {
+              // Handle any errors
+              console.error(error);
+              Swal.fire({
+                icon: "error",
+                title: "Lỗi xảy ra",
+                text: "Mật khẩu cũ không chính xác. Vui lòng nhập lại!!!",
+                customClass: {
+                  container: "swal-custom", // Apply the custom class to the Swal container
+                },
+              });
+            });
+        }
+      })
+      .then(() => {
+        // Set the z-index of the Swal container to be higher than the Modal's z-index
+        const swalContainer = document.querySelector(".swal-custom");
+        if (swalContainer) {
+          swalContainer.style.zIndex = theme.zIndex.modal + 1;
+        }
+      });
+  };
 
   return (
     <div>
@@ -212,7 +212,7 @@ const ChangePassword = ({ isOpen, handleClose }) => {
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
-                marginTop: "5%",
+                marginTop: "3%",
               }}
             >
               Thay đổi mật khẩu
@@ -223,14 +223,14 @@ const ChangePassword = ({ isOpen, handleClose }) => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
-                marginTop="5%"
+                marginTop="10px"
               >
                 <Stack spacing={1} sx={{ marginTop: "3%" }}>
                   <Typography
                     color={theme.palette.secondary.dark}
                     gutterBottom
                     variant="h4"
-                    marginTop="8%"
+                    marginTop="3%"
                   >
                     Mật khẩu cũ
                   </Typography>
@@ -255,7 +255,7 @@ const ChangePassword = ({ isOpen, handleClose }) => {
                     color={theme.palette.secondary.dark}
                     gutterBottom
                     variant="h4"
-                    marginTop="10%"
+                    marginTop="5%"
                   >
                     Mật khẩu mới
                   </Typography>
@@ -280,7 +280,7 @@ const ChangePassword = ({ isOpen, handleClose }) => {
                     color={theme.palette.secondary.dark}
                     gutterBottom
                     variant="h4"
-                    marginTop="10%"
+                    marginTop="5%"
                   >
                     Xác nhận mật khẩu
                   </Typography>
@@ -301,16 +301,15 @@ const ChangePassword = ({ isOpen, handleClose }) => {
               <Grid
                 container
                 direction="row"
-                justifyContent="center"
+                justifyContent="space-evenly"
                 alignItems="center"
-                spacing={7}
-                marginTop="2%"
+                marginTop="7%"
               >
                 <Grid item>
                   <CancelButton onClick={handleClose} />
                 </Grid>
                 <Grid item>
-                  <SaveButton />
+                  <SaveButton onClick={handleSave} />
                 </Grid>
               </Grid>
             </form>

@@ -18,11 +18,13 @@ const ItemModal = (props) => {
   };
   const [data, setData] = useState(defaultData);
   const [imageList, setImageList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenStaff");
 
   const fetchData = async () => {
+    setLoading(true);
     const requestOptions = {
       method: "GET",
       headers: {
@@ -40,6 +42,7 @@ const ItemModal = (props) => {
     if (data.data) {
       setData(data.data);
       setImageList(data.data.images);
+      setLoading(false);
     } else {
       Swal.fire({
         icon: "error",

@@ -56,6 +56,10 @@ const ParkingPriceDetailParking = Loadable(
   )
 );
 
+const AuthLoginAdmin = Loadable(
+  lazy(() => import("views/pages/authentication/authentication/Login"))
+);
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {

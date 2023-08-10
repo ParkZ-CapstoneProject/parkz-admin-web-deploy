@@ -92,7 +92,7 @@ const Page = () => {
               dispatch(updateTokenStaff(data.data.token));
               Swal.close();
               navigate("/request");
-              window.location.reload();
+              // window.location.reload();
             }
           }
           console.log("res", res);

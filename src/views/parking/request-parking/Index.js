@@ -59,6 +59,7 @@ const RequestedParking = (props) => {
     setRows(data.data);
     setLoading(false);
   };
+  console.log("rows", rows);
 
   if (loading) {
     return <Loading loading={loading} />;

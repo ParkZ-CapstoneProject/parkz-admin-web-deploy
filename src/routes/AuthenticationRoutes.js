@@ -9,9 +9,9 @@ import MinimalLayout from "layout/MinimalLayout";
 // const AuthLogin = Loadable(
 //   lazy(() => import("views/pages/authentication/authentication/Login"))
 // );
-const AuthLogin = Loadable(
-  lazy(() => import("views/pages/authentication/authentication/Login2"))
-);
+// const AuthLogin = Loadable(
+//   lazy(() => import("views/pages/authentication/authentication/Login2"))
+// );
 const AuthLoginAdmin = Loadable(
   lazy(() => import("views/pages/authentication/authentication/Login"))
 );
@@ -66,15 +66,11 @@ const AuthenticationRoutes = {
   element: <MinimalLayout />,
   children: [
     {
-      path: "login",
-      element: <AuthLogin />,
-    },
-    {
       path: "",
-      element: <AuthLogin />,
+      element: <AuthLoginAdmin />,
     },
     {
-      path: "login2",
+      path: "login",
       element: <AuthLoginAdmin />,
     },
     {

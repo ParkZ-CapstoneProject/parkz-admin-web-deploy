@@ -84,9 +84,11 @@ const FirebaseLogin = ({ ...others }) => {
             });
           } else {
             const parts = data.data.token.split(".");
+            const payload = parts[1];
+            const urlDecodedPayload = decodeURIComponent(payload);
+            const decodedPayload = atob(urlDecodedPayload);
 
-            // Decode the payload using the base64-decoding function
-            const user = JSON.parse(atob(parts[1]));
+            const user = JSON.parse(decodedPayload);
 
             if (user.role === "Admin") {
               localStorage.setItem("tokenAdmin", data.data.token);

@@ -44,11 +44,11 @@ const ProfileSection = () => {
 
   const admin = localStorage.getItem("admin"); // Set the authentication status here
   const adminData = JSON.parse(admin);
+  const token = localStorage.getItem("tokenStaff");
   const staff = localStorage.getItem("staff"); // Set the authentication status here
   const staffData = JSON.parse(staff);
+  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
 
-  // const [sdm, setSdm] = useState(true);
-  // const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenWallet, setIsOpenWallet] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -65,6 +65,10 @@ const ProfileSection = () => {
     navigate("/login");
   };
 
+  // const fetchData = async () => {
+  //   const response = await fetch(`${apiUrl}/`)
+  // }
+
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -77,21 +81,6 @@ const ProfileSection = () => {
     setSelectedIndex(index);
     handleClose(event);
     setIsOpen(true);
-  };
-
-  const handleListItemClickWallet = (event, index) => {
-    setSelectedIndex(index);
-    handleClose(event);
-    setIsOpenWallet(true);
-  };
-
-  const handleListItemProfileClick = (event, index, route) => {
-    setSelectedIndex(index);
-    handleClose(event);
-
-    if (route && route !== "") {
-      navigate(route);
-    }
   };
 
   const handleListItemClickClose = () => {

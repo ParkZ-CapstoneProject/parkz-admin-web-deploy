@@ -28,7 +28,7 @@ const ApproveParkingDetail = (props) => {
     );
 
     const data = await response.json();
-    console.log("data", data.data.images);
+    console.log("data", data.data);
     setData(data.data);
     setLoading(false);
   };
@@ -90,7 +90,16 @@ const ApproveParkingDetail = (props) => {
               </Typography>
             </Grid>
             <Grid item>
-              <Rating value={data?.stars} readOnly />
+              {data?.stars ? (
+                <Rating value={data?.stars} readOnly />
+              ) : (
+                <Typography
+                  color={theme.palette.common.dark}
+                  variant="subtitle1"
+                >
+                  Chưa có đánh giá
+                </Typography>
+              )}
             </Grid>
           </Grid>
 
@@ -193,7 +202,7 @@ const ApproveParkingDetail = (props) => {
             </Grid>
             <Grid item>
               <Typography color={theme.palette.common.dark} variant="subtitle1">
-                {data?.parkingPrices}
+                Chưa áp dụng giá
               </Typography>
             </Grid>
           </Grid>

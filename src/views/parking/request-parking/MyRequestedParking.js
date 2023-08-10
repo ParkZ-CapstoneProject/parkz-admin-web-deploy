@@ -28,9 +28,21 @@ export default function MyRequestedParking(props) {
     if (params.value === false) {
       return (
         <Chip
-          color="success"
+          color="error"
           label="Không"
           sx={{ padding: "10px", color: "#fff", fontWeight: "bold" }}
+        />
+      );
+    } else {
+      return (
+        <Chip
+          color="primary"
+          label="Có"
+          sx={{
+            padding: "10px 20px 10px 20px",
+            color: "#fff",
+            fontWeight: "bold",
+          }}
         />
       );
     }
@@ -61,7 +73,7 @@ export default function MyRequestedParking(props) {
     {
       field: "name",
       headerName: "Tên bãi",
-      description: "This column has a value getter and is not sortable.",
+      // description: "This column has a value getter and is not sortable.",
       // sortable: false,
       width: 300,
       valueGetter: (params) => `${params.row.name || ""}`,
@@ -70,7 +82,6 @@ export default function MyRequestedParking(props) {
     {
       field: "carSpot",
       headerName: "Vị trí ô tô",
-      type: "number",
       width: 200,
       valueGetter: getCellValue,
     },
@@ -115,6 +126,7 @@ export default function MyRequestedParking(props) {
             <DataGrid
               rows={rows}
               rowHeight={70}
+              autoHeight
               getRowId={(row) => row.parkingId}
               columns={columns}
               initialState={{

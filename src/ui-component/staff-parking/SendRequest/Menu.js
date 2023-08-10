@@ -2,8 +2,6 @@ import { IconButton, List, ListItem, Popover, Typography } from "@mui/material";
 import { useState } from "react";
 import { MoreVert } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useNavigate } from "react-router";
-import EditModal from "ui-component/modal/staff-parking/edit/EditModal";
 import CreateModal from "ui-component/modal/staff-parking/create/CreateModal";
 
 const Menu = ({ approveParkingId }) => {

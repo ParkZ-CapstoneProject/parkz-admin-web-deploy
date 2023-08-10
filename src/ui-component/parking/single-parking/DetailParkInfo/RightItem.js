@@ -69,19 +69,19 @@ const RightItem = ({ data }) => {
           }
           color={theme.palette.primary.main}
         />
-        <Grid item>
-          <Typography color={theme.palette.primary.main} variant="h3">
-            Mô tả
-          </Typography>
+        <Grid item container direction="row" justifyContent="space-around">
+          <Grid item xs={5}>
+            <Typography color={theme.palette.primary.main} variant="h3">
+              Mô tả
+            </Typography>
+          </Grid>
+          <Grid item xs={7}>
+            <Typography color={theme.palette.common.black} variant="h4">
+              {data?.description}
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Typography color={theme.palette.common.black} variant="h4">
-            {data?.description}
-          </Typography>
-        </Grid>
-        <GridItem leftText="Slot xe ô tô" rightText={data?.carSpot} />
-        {/* <GridItem leftText="Gói cước xe ô tô" rightText="Gói A" /> */}
-        {/* <GridItem leftText="Người quản lý" rightText="Hoàng Văn Minh" /> */}
+        <GridItem leftText="Tổng số slot" rightText={data?.carSpot} />
       </Grid>
     </>
   );

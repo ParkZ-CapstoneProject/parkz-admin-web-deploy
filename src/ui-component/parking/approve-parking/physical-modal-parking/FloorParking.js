@@ -71,30 +71,36 @@ const FloorParking = (props) => {
 
   return (
     <div>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-end"
-        alignItems="center"
-        sx={{ marginTop: "25px" }}
-      >
-        {/* <EditButton onClick={handleEdit} /> */}
-      </Grid>
-      <Tabs
-        value={currentFloor}
-        onChange={handleTabChange}
-        variant="fullWidth"
-        aria-label="Parking Floors"
-      >
-        {floors?.map((floor, index) => (
-          <Tab key={floor.floorId} label={floor.floorName} />
-        ))}
-      </Tabs>
-      {floors?.length > 0 ? (
-        <PhysicalModal
-          floorIndex={floors[currentFloor].floorId}
-          listCarSlots={floors[currentFloor].carSlots}
-        />
+      {floors ? (
+        <>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            sx={{ marginTop: "25px" }}
+          >
+            {/* <EditButton onClick={handleEdit} /> */}
+          </Grid>
+          <Tabs
+            value={currentFloor}
+            onChange={handleTabChange}
+            variant="fullWidth"
+            aria-label="Parking Floors"
+          >
+            {floors?.map((floor, index) => (
+              <Tab key={index} label={floor.floorName} />
+            ))}
+          </Tabs>
+          {floors?.length > 0 ? (
+            <PhysicalModal
+              floorIndex={floors[currentFloor].floorId}
+              listCarSlots={floors[currentFloor].carSlots}
+            />
+          ) : (
+            <></>
+          )}
+        </>
       ) : (
         <></>
       )}

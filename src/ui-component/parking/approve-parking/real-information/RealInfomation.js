@@ -43,7 +43,7 @@ const RealInformation = (props) => {
     <>
       <Typography
         color={theme.palette.primary.dark}
-        variant="h1"
+        variant="h2"
         sx={{ marginTop: "15px" }}
       >
         Chi tiết yêu cầu duyệt
@@ -51,7 +51,7 @@ const RealInformation = (props) => {
 
       <Typography
         color={theme.palette.primary.dark}
-        variant="h2"
+        variant="h3"
         sx={{ marginTop: "15px" }}
       >
         Thông tin nhân viên thực địa
@@ -72,12 +72,12 @@ const RealInformation = (props) => {
           xs={12}
         >
           <Grid item xs={2}>
-            <Typography color={theme.palette.common.dark} variant="h3">
+            <Typography color={theme.palette.common.dark} variant="h4">
               Mã nhân viên
             </Typography>
           </Grid>
           <Grid item xs={9}>
-            <Typography color={theme.palette.common.dark} variant="h4">
+            <Typography color={theme.palette.common.dark} variant="subtitle1">
               {data?.staffId}
             </Typography>
           </Grid>
@@ -90,12 +90,12 @@ const RealInformation = (props) => {
           alignItems="flex-start"
         >
           <Grid item xs={2}>
-            <Typography color={theme.palette.common.dark} variant="h3">
+            <Typography color={theme.palette.common.dark} variant="h4">
               Họ và tên
             </Typography>
           </Grid>
           <Grid item xs={9}>
-            <Typography color={theme.palette.common.dark} variant="h4">
+            <Typography color={theme.palette.common.dark} variant="subtitle1">
               {data?.staffName}
             </Typography>
           </Grid>
@@ -117,7 +117,7 @@ const RealInformation = (props) => {
           alignItems="flex-start"
         >
           <Grid item xs={2}>
-            <Typography color={theme.palette.common.dark} variant="h3">
+            <Typography color={theme.palette.common.dark} variant="h4">
               Trạng thái
             </Typography>
           </Grid>
@@ -130,33 +130,41 @@ const RealInformation = (props) => {
           </Grid>
         </Grid>
 
-        <Grid item container direction="column">
+        <Grid
+          item
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="flex-start"
+        >
           <Grid item xs={2}>
-            <Typography color={theme.palette.common.dark} variant="h3">
+            <Typography color={theme.palette.common.dark} variant="h4">
               Ghi chú
             </Typography>
           </Grid>
           <Grid item xs={9}>
-            <Typography color={theme.palette.common.dark} variant="h4">
+            <Typography color={theme.palette.common.dark} variant="subtitle1">
               {data?.note}
             </Typography>
           </Grid>
         </Grid>
 
         <Grid item>
-          <Typography color={theme.palette.secondary.dark} variant="h3">
+          <Typography color={theme.palette.secondary.dark} variant="h4">
             Hình ảnh
           </Typography>
         </Grid>
-        <Grid item container direction="row" spacing={5}>
+        <Grid item container direction="row" spacing={3}>
           {data?.images.map((image, index) => {
             return (
               <Grid item key={index}>
                 <img
                   src={image.url}
-                  width={300}
-                  height={200}
-                  style={{ borderRadius: "10px" }}
+                  style={{
+                    borderRadius: "10px",
+                    width: "300px",
+                    height: "180px",
+                  }}
                   alt=""
                 />
               </Grid>

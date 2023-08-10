@@ -5,30 +5,39 @@ import { useNavigate, useParams } from "react-router";
 import { Grid } from "@mui/material";
 import ApproveParkingDetail from "ui-component/parking/approve-parking/parking-detail/ApproveParkingDetail";
 import FloorParking from "ui-component/parking/approve-parking/physical-modal-parking/FloorParking";
-import Tabs from "ui-component/parking/approve-parking/Tabs";
+// import Tabs from "ui-component/parking/approve-parking/Tabs";
 import Swal from "sweetalert2";
 import SendApproveButton from "ui-component/buttons/send-approve/SendApproveButton";
 import AllSendRequest from "ui-component/staff-parking/SendRequest/Index";
+import TabRequest from "ui-component/Tabs/TabRequest";
 
 const NewRequest = () => {
   const { parkingId } = useParams();
   const [isDone, setIsDone] = useState(false);
   const [approveId, setApproveId] = useState(0);
-  console.log("approveId", approveId);
+  const [activeTab, setActiveTab] = useState("tabs-home3");
 
   const navigate = useNavigate();
+
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+    console.log("tabId", tabId);
+  };
 
   const tabs = [
     {
       label: "Thông tin bãi",
+      id: "tabs-home3",
       component: <ApproveParkingDetail parkingId={parkingId} />,
     },
     {
       label: "Thông tin sa bàn",
+      id: "tabs-profile3",
       component: <FloorParking parkingId={parkingId} />,
     },
     {
       label: "Yêu cầu gửi duyệt",
+      id: "tabs-messages3",
       component: (
         <AllSendRequest
           parkingId={parkingId}
@@ -41,8 +50,7 @@ const NewRequest = () => {
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenStaff");
-  // const user = localStorage.getItem("staff");
-  // const staff = JSON.parse(user);
+
   const requestOptions = {
     method: "PUT",
     headers: {
@@ -101,8 +109,22 @@ const NewRequest = () => {
     <>
       <MainCard title="Tạo yêu cầu duyệt bãi xe">
         <div>
-          <Tabs tabs={tabs} />
+          <TabRequest
+            tabs={tabs}
+            activeTab={activeTab}
+            handleTabClick={handleTabClick}
+          />
         </div>
+        {tabs.map((tab) => (
+          <div
+            key={tab.id}
+            role="tabpanel"
+            aria-labelledby={tab.id}
+            className={activeTab === tab.id ? "" : "hidden"}
+          >
+            {tab.component}
+          </div>
+        ))}
       </MainCard>
 
       {!isDone && approveId > 0 ? (
