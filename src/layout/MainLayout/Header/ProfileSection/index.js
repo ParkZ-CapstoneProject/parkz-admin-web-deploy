@@ -31,7 +31,7 @@ import Transitions from "ui-component/extend/Transitions";
 import User1 from "assets/images/users/user-round.svg";
 
 // assets
-import { IconLogout, IconSettings, IconUser, IconWallet } from "@tabler/icons";
+import { IconLogout, IconSettings } from "@tabler/icons";
 import ChangePassword from "ui-component/modal/password/ChangePassword";
 import WalletModal from "ui-component/modal/wallet/WalletModal";
 
@@ -53,6 +53,7 @@ const ProfileSection = () => {
   const [isOpenWallet, setIsOpenWallet] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState();
   /**
    * anchorRef is used on different componets and specifying one type leads to other components throwing an error
    * */
@@ -65,9 +66,29 @@ const ProfileSection = () => {
     navigate("/login");
   };
 
-  // const fetchData = async () => {
-  //   const response = await fetch(`${apiUrl}/`)
-  // }
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${token}`,
+    },
+  };
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `${apiUrl}/staff-account-management/${staffData._id}`,
+      requestOptions
+    );
+
+    const data = response.json();
+    if (data) {
+      setData(data.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -126,7 +147,7 @@ const ProfileSection = () => {
         }}
         icon={
           <Avatar
-            src={User1}
+            src={data?.avatar ? data?.avatar : User1}
             sx={{
               ...theme.typography.mediumAvatar,
               margin: "8px 0 8px 8px !important",
@@ -190,7 +211,7 @@ const ProfileSection = () => {
                           variant="h4"
                           sx={{ fontWeight: 400 }}
                         >
-                          {adminData?.name ? adminData?.name : staffData?.name}
+                          {adminData?.name ? adminData?.name : data?.name}
                         </Typography>
                       </Stack>
                       <Typography variant="subtitle2">
