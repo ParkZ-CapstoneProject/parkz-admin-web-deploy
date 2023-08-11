@@ -1,30 +1,75 @@
-import * as React from "react";
+import React, { forwardRef } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
 import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@material-ui/core/IconButton";
-import { useTheme } from "@mui/material/styles";
+// import { useTheme } from "@mui/material/styles";
 import ItemModal from "./ItemModal";
+import { useSpring, animated } from "@react-spring/web";
+import PropTypes from "prop-types";
+
+const Fade = forwardRef(function Fade(props, ref) {
+  const {
+    children,
+    in: open,
+    onClick,
+    onEnter,
+    onExited,
+    ownerState,
+    ...other
+  } = props;
+  const style = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: open ? 1 : 0 },
+    onStart: () => {
+      if (open && onEnter) {
+        onEnter(null, true);
+      }
+    },
+    onRest: () => {
+      if (!open && onExited) {
+        onExited(null, true);
+      }
+    },
+  });
+
+  return (
+    <animated.div ref={ref} style={style} {...other}>
+      {React.cloneElement(children, { onClick })}
+    </animated.div>
+  );
+});
+
+Fade.propTypes = {
+  children: PropTypes.element.isRequired,
+  in: PropTypes.bool,
+  onClick: PropTypes.any,
+  onEnter: PropTypes.func,
+  onExited: PropTypes.func,
+  ownerState: PropTypes.any,
+};
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "40%",
-  height: "83%",
+  width: "41%",
   bgcolor: "background.paper",
   borderRadius: "5px",
-  boxShadow: 12,
+  boxShadow: 24,
   p: 4,
+};
+
+const iconStyle = {
+  position: "absolute",
+  top: "10px",
+  right: "10px",
 };
 
 export default function DeleteModalCustomer(props) {
   const { isOpenDelete, setIsOpenDelete, id } = props;
-  const theme = useTheme();
-  // const dispatch = useDispatch();
+  // const theme = useTheme();
 
   const handleClose = () => {
     setIsOpenDelete(false);
@@ -32,35 +77,30 @@ export default function DeleteModalCustomer(props) {
 
   return (
     <div>
-      {/* <Button onClick={() => handleOpen("createModalStaff")}>Open modal</Button> */}
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby="spring-modal-title"
+        aria-describedby="spring-modal-description"
         open={isOpenDelete}
         onClose={handleClose}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
           backdrop: {
-            timeout: 500,
+            TransitionComponent: Fade,
           },
         }}
-        sx={{ border: "none" }}
       >
         <Fade in={isOpenDelete}>
           <Box sx={style}>
-            <IconButton
-              onClick={handleClose}
-              style={{
-                position: "absolute",
-                top: 1,
-                right: 1,
-                color: theme.palette.grey[500],
-                backgroundColor: theme.palette.grey[100],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
+            <div style={iconStyle}>
+              <CloseIcon
+                onClick={handleClose}
+                sx={{
+                  "&:hover": { cursor: "pointer", background: "lightgray" },
+                }}
+              />
+              {/* Replace IconName with the desired icon component */}
+            </div>
             <ItemModal setIsOpenDelete={setIsOpenDelete} id={id} />
           </Box>
         </Fade>

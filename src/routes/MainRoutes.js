@@ -55,10 +55,11 @@ const ParkingPriceDetailParking = Loadable(
     )
   )
 );
+const Wallet = Loadable(lazy(() => import("views/wallet/Wallet")));
 
-const AuthLoginAdmin = Loadable(
-  lazy(() => import("views/pages/authentication/authentication/Login"))
-);
+// const AuthLoginAdmin = Loadable(
+//   lazy(() => import("views/pages/authentication/authentication/Login"))
+// );
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -133,6 +134,10 @@ const MainRoutes = {
     {
       path: `/order`,
       element: <Order />,
+    },
+    {
+      path: `/wallet`,
+      element: <Wallet />,
     },
   ],
 };

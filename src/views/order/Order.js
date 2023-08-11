@@ -1,13 +1,8 @@
-import * as React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
 import { Chip, Skeleton, Typography } from "@mui/material";
-import Menu from "ui-component/staff/Menu";
-import * as signalR from "@microsoft/signalr";
-import { useState } from "react";
 import Loading from "ui-component/back-drop/Loading";
-import { useRef } from "react";
 import { ImFilesEmpty } from "react-icons/im";
 
 const getCellValue = (params) => {
@@ -79,15 +74,6 @@ const columns = [
     sortable: false,
     disableColumnMenu: true,
   },
-  // {
-  //   field: "action",
-  //   headerName: "",
-  //   width: 70,
-  //   sortable: false,
-  //   disableColumnMenu: true,
-  //   align: "center",
-  //   renderCell: (params) => <Menu value={params.value} id={params.id} />,
-  // },
 ];
 
 export default function Order() {
@@ -108,25 +94,7 @@ export default function Order() {
   const token = localStorage.getItem("tokenAdmin");
 
   useEffect(() => {
-    const connection = new signalR.HubConnectionBuilder()
-      .withUrl("http://parkzwebapiver2-001-site1.ctempurl.com/parkz")
-      .build();
-    console.log("connection", connection);
-
-    connection
-      .start()
-      .then(() => console.log("Connection started!"))
-      .catch((err) => console.error("Error: ", err));
-
-    connection.on("LoadKeeperAccounts", () => {
-      fetchData();
-    });
-
     fetchData();
-
-    return () => {
-      connection.stop();
-    };
   }, []);
 
   const requestOptions = {

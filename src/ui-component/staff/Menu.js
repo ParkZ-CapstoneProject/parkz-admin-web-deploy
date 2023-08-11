@@ -72,7 +72,7 @@ const Menu = ({ id }) => {
           <ListItem onClick={() => handleOpenModalDelete("modalStaffDelete")}>
             <DeleteIcon sx={{ marginRight: "3%", color: "#f44336" }} />
             <Typography color="error" variant="subtitle1">
-              Vô hiệu hóa
+              Xóa
             </Typography>
           </ListItem>
         </List>

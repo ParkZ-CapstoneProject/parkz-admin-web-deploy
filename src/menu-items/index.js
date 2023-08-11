@@ -9,6 +9,7 @@ import order from "./order";
 import fee from "./feeSetting";
 import parkingPending from "./parkingPending";
 import parkingRequest from "./parkingRequest";
+import wallet from "./wallet";
 
 const Menu = () => {
   const tokenAdmin = useSelector((state) => state.token.tokenAdmin);
@@ -26,6 +27,7 @@ const Menu = () => {
           booking,
           order,
           fee,
+          wallet,
         ]
       : tokenStaff
       ? [parkingRequest]

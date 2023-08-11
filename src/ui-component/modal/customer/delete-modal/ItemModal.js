@@ -3,10 +3,11 @@ import { useTheme } from "@mui/material/styles";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import CancelButton from "ui-component/buttons/cancel-button/CancelButton";
-import UploadAvatar from "ui-component/upload-file/upload-staff/UploadAvatar";
+import UploadAvatar from "ui-component/upload-file/customer/UploadAvatar";
 import Swal from "sweetalert2";
 import Loading from "ui-component/back-drop/Loading";
 import EnableButton from "ui-component/buttons/enable-button/EnableButton";
+import User from "../../../../assets/images/avatar.png";
 
 const ItemModal = (props) => {
   const { setIsOpenDelete, id } = props;
@@ -245,7 +246,7 @@ const ItemModal = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={7}>
-            <UploadAvatar avatar={data?.avatar} />
+            <UploadAvatar avatar={data?.avatar ? data?.avatar : User} />
           </Grid>
         </Grid>
 

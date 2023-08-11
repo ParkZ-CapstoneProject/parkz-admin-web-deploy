@@ -7,8 +7,9 @@ import { closeModal } from "store/modalReducer";
 import Loading from "ui-component/back-drop/Loading";
 // import SaveButton from "ui-component/buttons/save-button/SaveButton";
 import CancelButton from "ui-component/buttons/cancel-button/CancelButton";
-import UploadAvatar from "ui-component/upload-file/upload-staff/UploadAvatar";
+import UploadAvatar from "ui-component/upload-file/customer/UploadAvatar";
 // import DeleteButton from "ui-component/buttons/delete-button/DeleteButton";
+import User from "../../../../assets/images/avatar.png";
 
 const ItemModal = (props) => {
   const { setIsOpenDetail, id } = props;
@@ -184,13 +185,7 @@ const ItemModal = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={7}>
-            <UploadAvatar
-              avatar={
-                data?.avatar
-                  ? data.avatar
-                  : "https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
-              }
-            />
+            <UploadAvatar avatar={data?.avatar ? data.avatar : User} />
           </Grid>
         </Grid>
 
