@@ -275,6 +275,7 @@ const FirebaseLogin = ({ ...others }) => {
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
                 <Button
+                  className="css-1ul58bt"
                   disableElevation
                   disabled={isSubmitting}
                   fullWidth
