@@ -3,7 +3,6 @@ import "./FeeCardBus.scss";
 
 const FeeCardBus = (props) => {
   const { setEdit, setIsOpen, setId, bus } = props;
-  console.log("bus", bus);
 
   const handleClick = () => {
     setEdit(true);

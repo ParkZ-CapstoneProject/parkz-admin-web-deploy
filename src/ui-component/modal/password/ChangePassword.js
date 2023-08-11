@@ -82,7 +82,7 @@ const ChangePassword = ({ isOpen, handleClose }) => {
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
 
   const requestBody = {
-    userId: userData._id,
+    userId: userData?._id,
     oldPassword: oldPassword,
     newPassword: password,
   };

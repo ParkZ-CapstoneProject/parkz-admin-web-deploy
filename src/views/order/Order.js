@@ -2,12 +2,13 @@ import * as React from "react";
 import { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
-import { Chip, Skeleton } from "@mui/material";
+import { Chip, Skeleton, Typography } from "@mui/material";
 import Menu from "ui-component/staff/Menu";
 import * as signalR from "@microsoft/signalr";
 import { useState } from "react";
 import Loading from "ui-component/back-drop/Loading";
 import { useRef } from "react";
+import { ImFilesEmpty } from "react-icons/im";
 
 const getCellValue = (params) => {
   return params.value ? params.value : "-------";
@@ -165,23 +166,42 @@ export default function Order() {
   return (
     <>
       <MainCard title={"Tất cả hóa đơn"}>
-        <div id="outer-div">
-          <DataGrid
-            rows={rows}
-            rowHeight={70}
-            autoHeight
-            getRowId={(row) => row.billId}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-            }}
-            pageSizeOptions={[5, 10, 25]}
-            checkboxSelection
-            style={{ paddingTop: "12px" }}
-          />
-        </div>
+        {rows ? (
+          <div id="outer-div">
+            <DataGrid
+              rows={rows}
+              rowHeight={70}
+              autoHeight
+              getRowId={(row) => row.billId}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 10 },
+                },
+              }}
+              pageSizeOptions={[5, 10, 25]}
+              checkboxSelection
+              style={{ paddingTop: "12px" }}
+            />
+          </div>
+        ) : (
+          <>
+            <Typography
+              variant="h1"
+              color="#21130d"
+              sx={{ textAlign: "center", marginTop: "5%" }}
+            >
+              Không tìm thấy dữ liệu
+            </Typography>
+            <ImFilesEmpty
+              style={{
+                fontSize: "150px",
+                marginTop: "5%",
+                marginLeft: "46%",
+              }}
+            />
+          </>
+        )}
       </MainCard>
     </>
   );

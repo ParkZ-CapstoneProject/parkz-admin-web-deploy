@@ -1,5 +1,6 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { ImFilesEmpty } from "react-icons/im";
 import CreateButton from "ui-component/buttons/create-button/CreateButton";
 import FeeCardBus from "ui-component/cards/Fee/FeeCardBus";
 import FeeCardPerson from "ui-component/cards/Fee/FeeCardPerson";
@@ -52,31 +53,50 @@ const Fee = () => {
         >
           <CreateButton onClick={handleOpenModal} />
         </Grid>
-        <Grid
-          container
-          direction="row"
-          spacing={15}
-          justifyContent="center"
-          alignItems="center"
-          padding={5}
-        >
-          <Grid item>
-            <FeeCardBus
-              setEdit={setEdit}
-              setIsOpen={setIsOpen}
-              bus={data[0]}
-              setId={setId}
-            />
+        {data ? (
+          <Grid
+            container
+            direction="row"
+            spacing={15}
+            justifyContent="center"
+            alignItems="center"
+            padding={5}
+          >
+            <Grid item>
+              <FeeCardBus
+                setEdit={setEdit}
+                setIsOpen={setIsOpen}
+                bus={data[0]}
+                setId={setId}
+              />
+            </Grid>
+            <Grid item sx={{ marginLeft: "10px" }}>
+              <FeeCardPerson
+                setEdit={setEdit}
+                setIsOpen={setIsOpen}
+                setId={setId}
+                person={data[1]}
+              />
+            </Grid>
           </Grid>
-          <Grid item sx={{ marginLeft: "10px" }}>
-            <FeeCardPerson
-              setEdit={setEdit}
-              setIsOpen={setIsOpen}
-              setId={setId}
-              person={data[1]}
+        ) : (
+          <>
+            <Typography
+              variant="h1"
+              color="#21130d"
+              sx={{ textAlign: "center", marginTop: "5%" }}
+            >
+              Không tìm thấy dữ liệu
+            </Typography>
+            <ImFilesEmpty
+              style={{
+                fontSize: "150px",
+                marginTop: "5%",
+                marginLeft: "46%",
+              }}
             />
-          </Grid>
-        </Grid>
+          </>
+        )}
       </MainCard>
 
       <FeeModal isOpen={isOpen} setIsOpen={setIsOpen} edit={edit} id={id} />

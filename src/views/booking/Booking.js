@@ -3,23 +3,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
 import SearchSection from "ui-component/search-section";
 import SubCard from "ui-component/cards/SubCard";
-import { Avatar, Chip, Grid, Skeleton } from "@mui/material";
+import { Avatar, Chip, Grid, Skeleton, Typography } from "@mui/material";
 import Menu from "ui-component/booking/Menu";
 import Loading from "ui-component/back-drop/Loading";
 import { useRef } from "react";
 import { useEffect } from "react";
-// import Loading from "ui-component/back-drop/Loading";
-
-const renderAvatarCell = (params) => {
-  return params.value ? (
-    <Avatar src={params.value} alt="avatar" />
-  ) : (
-    <Avatar
-      src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"
-      alt="avatar"
-    />
-  );
-};
+import { ImFilesEmpty } from "react-icons/im";
 
 const renderCellStatus = (params) => {
   const statusMap = {
@@ -56,27 +45,7 @@ const columns = [
     field: "bookingId",
     headerName: "ID",
     width: 70,
-    valueGetter: (params) => `${params.row.bookingDtoForAdmin.bookingId}`,
-  },
-  {
-    field: "avatar",
-    headerName: "Ảnh",
-    width: 80,
-    renderCell: renderAvatarCell,
-    sortable: false,
-    valueGetter: (params) =>
-      `${
-        params.row.userForGetAllBookingForAdminResponse.avatar ? (
-          <Avatar
-            src={params.row.userForGetAllBookingForAdminResponse.avatar}
-          />
-        ) : (
-          <Avatar
-            src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"
-            alt="avatar"
-          />
-        )
-      }`,
+    valueGetter: (params) => `${params.row.bookingDtoForAdmin?.bookingId}`,
   },
   {
     field: "name",
@@ -85,20 +54,20 @@ const columns = [
     sortable: false,
     width: 200,
     valueGetter: (params) =>
-      `${params.row.userForGetAllBookingForAdminResponse.name || "----"}`,
+      `${params.row.userForGetAllBookingForAdminResponse?.name || "----"}`,
   },
   {
     field: "floorName",
     headerName: "Tầng",
     width: 120,
     valueGetter: (params) =>
-      `${params.row.floorDtoForAdmin.floorName || "----"}`,
+      `${params.row.floorDtoForAdmin?.floorName || "----"}`,
   },
   {
     field: "slotsName",
     headerName: "Vị trí",
     width: 120,
-    valueGetter: (params) => `${params.row.slotDtoForAdmin.name || "----"}`,
+    valueGetter: (params) => `${params.row.slotDtoForAdmin?.name || "----"}`,
   },
   {
     field: "totalPrice",
@@ -106,41 +75,41 @@ const columns = [
     // type: "number",
     width: 100,
     valueGetter: (params) =>
-      `${params.row.bookingDtoForAdmin.totalPrice || "----"}`,
+      `${params.row.bookingDtoForAdmin?.totalPrice || "----"}`,
   },
   {
     field: "phone",
     headerName: "Số điện thoại",
     width: 130,
     valueGetter: (params) =>
-      `${params.row.userForGetAllBookingForAdminResponse.phone || "----"}`,
+      `${params.row.userForGetAllBookingForAdminResponse?.phone || "----"}`,
   },
   {
     field: "parkingDtoForAdmin.name",
     headerName: "Bãi xe",
     width: 200,
-    valueGetter: (params) => `${params.row.parkingDtoForAdmin.name || "----"}`,
+    valueGetter: (params) => `${params.row.parkingDtoForAdmin?.name || "----"}`,
   },
   {
     field: "checkInTime",
     headerName: "Giờ vào",
     width: 120,
     valueGetter: (params) =>
-      `${params.row.bookingDtoForAdmin.checkInTime || "----"}`,
+      `${params.row.bookingDtoForAdmin?.checkInTime || "----"}`,
   },
   {
     field: "checkOutTime",
     headerName: "Giờ ra",
     width: 120,
     valueGetter: (params) =>
-      `${params.row.bookingDtoForAdmin.checkOutTime || "----"}`,
+      `${params.row.bookingDtoForAdmin?.checkOutTime || "----"}`,
   },
   {
     field: "status",
     headerName: "Trạng thái",
-    width: 120,
+    width: 160,
     valueGetter: (params) =>
-      `${params.row.bookingDtoForAdmin.status || "----"}`,
+      `${params.row.bookingDtoForAdmin?.status || "----"}`,
     renderCell: renderCellStatus,
     sortable: false,
     disableColumnMenu: true,
@@ -199,21 +168,40 @@ export default function DataTable(props) {
           </SubCard>
         </Grid>
         <div id="outer-div">
-          <DataGrid
-            rows={rows}
-            rowHeight={70}
-            getRowId={(row) => row.bookingDtoForAdmin.bookingId}
-            autoHeight
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-            }}
-            pageSizeOptions={[5, 10, 25]}
-            checkboxSelection
-            style={{ paddingTop: "12px" }}
-          />
+          {rows ? (
+            <DataGrid
+              rows={rows}
+              rowHeight={70}
+              getRowId={(row) => row.bookingDtoForAdmin.bookingId}
+              autoHeight
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 10 },
+                },
+              }}
+              pageSizeOptions={[5, 10, 25]}
+              checkboxSelection
+              style={{ paddingTop: "12px" }}
+            />
+          ) : (
+            <>
+              <Typography
+                variant="h1"
+                color="#21130d"
+                sx={{ textAlign: "center", marginTop: "15%" }}
+              >
+                Không tìm thấy dữ liệu
+              </Typography>
+              <ImFilesEmpty
+                style={{
+                  fontSize: "150px",
+                  marginTop: "5%",
+                  marginLeft: "46%",
+                }}
+              />
+            </>
+          )}
         </div>
       </MainCard>
     </>

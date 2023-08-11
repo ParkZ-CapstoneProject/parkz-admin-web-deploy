@@ -10,6 +10,7 @@ import Loading from "ui-component/back-drop/Loading";
 import { ImFilesEmpty } from "react-icons/im";
 import { useRef } from "react";
 import { useEffect } from "react";
+import User from "../../assets/images/avatar.png";
 
 const renderAvatarCell = (params) => {
   return (
@@ -17,7 +18,7 @@ const renderAvatarCell = (params) => {
       {params.value ? (
         <Avatar src={params.value} alt="avatar" />
       ) : (
-        <Avatar src="https://static.vecteezy.com/system/resources/previews/002/002/403/original/man-with-beard-avatar-character-isolated-icon-free-vector.jpg" />
+        <Avatar src={User} />
       )}
     </>
   );
