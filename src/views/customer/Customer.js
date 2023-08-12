@@ -96,7 +96,7 @@ const columns = [
     sortable: false,
     disableColumnMenu: true,
     align: "center",
-    renderCell: (params) => <Menu value={params.value} id={params.id} />,
+    renderCell: (params) => <Menu value={params.row.isActive} id={params.id} />,
   },
 ];
 

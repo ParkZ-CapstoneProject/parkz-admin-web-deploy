@@ -23,7 +23,7 @@ const Booking = () => {
   const fetchData = async () => {
     setLoading(true);
     const response = await fetch(
-      `${apiUrl}/admin/booking-management?pageNo=1&pageSize=11`,
+      `${apiUrl}/admin/booking-management?pageNo=1&pageSize=300`,
       requestOptions
     );
     const data = await response.json();

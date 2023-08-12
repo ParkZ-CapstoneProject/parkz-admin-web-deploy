@@ -68,7 +68,7 @@ const iconStyle = {
 };
 
 export default function DeleteModalCustomer(props) {
-  const { isOpenDelete, setIsOpenDelete, id } = props;
+  const { isOpenDelete, setIsOpenDelete, id, value } = props;
   // const theme = useTheme();
 
   const handleClose = () => {
@@ -101,7 +101,11 @@ export default function DeleteModalCustomer(props) {
               />
               {/* Replace IconName with the desired icon component */}
             </div>
-            <ItemModal setIsOpenDelete={setIsOpenDelete} id={id} />
+            <ItemModal
+              setIsOpenDelete={setIsOpenDelete}
+              id={id}
+              value={value}
+            />
           </Box>
         </Fade>
       </Modal>

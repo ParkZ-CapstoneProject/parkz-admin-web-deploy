@@ -8,9 +8,10 @@ import Swal from "sweetalert2";
 import Loading from "ui-component/back-drop/Loading";
 import EnableButton from "ui-component/buttons/enable-button/EnableButton";
 import User from "../../../../assets/images/avatar.png";
+import ActiveButton from "../../../buttons/active-button/ActiveButton";
 
 const ItemModal = (props) => {
-  const { setIsOpenDelete, id } = props;
+  const { setIsOpenDelete, id, value } = props;
   const theme = useTheme();
   // const staffId = useSelector((state) => state.modal.staffId);
 
@@ -51,19 +52,21 @@ const ItemModal = (props) => {
     setIsOpenDelete(false);
   };
 
-  const handleDeleteStaff = (e) => {
+  const handleDeleteStaff = async (e) => {
     e.preventDefault();
 
     Swal.fire({
       title: "Xác nhận?",
-      text: "Bạn có chắc chắn muốn lưu!",
+      text: value
+        ? "Bạn có chắc chắn muốn vô hiệu hóa người dùng này!"
+        : "Bạn có chắc chắn muốn kích hoạt người dùng này!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       cancelButtonText: "Hủy",
       confirmButtonText: "Xác nhận!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         Swal.fire({
           icon: "info",
@@ -77,38 +80,28 @@ const ItemModal = (props) => {
         });
 
         const requestOps = {
-          method: "DELETE",
+          method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json", // Replace with the appropriate content type
           },
         };
 
-        fetch(`${apiUrl}/accounts/${id}`, requestOps)
-          .then((response) => {
-            if (response.ok) {
-              setIsOpenDelete(false);
-              Swal.fire({
-                icon: "success",
-                text: "Vô hiệu hóa thành công!",
-              });
-              return response.json();
-            } else {
-              Swal.fire({
-                icon: "error",
-                text: "Xảy ra lỗi khi vô hiệu hóa!",
-              });
-              throw new Error("Request failed");
-            }
-          })
-          .then((data) => {
-            // Handle response data
-            console.log(data);
-          })
-          .catch((error) => {
-            // Handle error
-            console.error(error);
+        const response = await fetch(`${apiUrl}/accounts/${id}`, requestOps);
+        if (response.status === 204) {
+          setIsOpenDelete(false);
+          Swal.fire({
+            icon: "success",
+            text: value ? "Vô hiệu hóa thành công!" : "Kích hoạt thành công!",
           });
+          return response.json();
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: response.message,
+          });
+          throw new Error("Request failed");
+        }
       }
     });
   };
@@ -261,9 +254,15 @@ const ItemModal = (props) => {
           <Grid item>
             <CancelButton onClick={handleCloseModal} />
           </Grid>
-          <Grid item>
-            <EnableButton onClick={handleDeleteStaff} />
-          </Grid>
+          {value ? (
+            <Grid item>
+              <EnableButton onClick={handleDeleteStaff} />
+            </Grid>
+          ) : (
+            <Grid item>
+              <ActiveButton onClick={handleDeleteStaff} />
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </>

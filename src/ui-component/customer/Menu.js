@@ -3,6 +3,7 @@ import { useState } from "react";
 import { MoreVert } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import DetailModalCustomer from "ui-component/modal/customer/detail-modal/DetailModaCustomer";
 import DeleteModalCustomer from "ui-component/modal/customer/delete-modal/DeleteModalCustomer";
 
@@ -47,12 +48,6 @@ const Menu = ({ value, id }) => {
         }}
       >
         <List sx={{ width: "140px" }}>
-          {/* <ListItem onClick={() => handleOpenModalEdit("modalStaffEdit")}>
-            <EditIcon sx={{ marginRight: "3%", color: "#2196f3" }} />
-            <Typography color="primary" variant="subtitle1">
-              Chỉnh sửa
-            </Typography>
-          </ListItem> */}
           <ListItem onClick={handleOpenModalDetail}>
             <RemoveRedEyeIcon sx={{ marginRight: "3%", color: "#673ab7" }} />
             <Typography color="secondary" variant="subtitle1">
@@ -60,10 +55,23 @@ const Menu = ({ value, id }) => {
             </Typography>
           </ListItem>
           <ListItem onClick={handleOpenModalDelete}>
-            <DeleteIcon sx={{ marginRight: "3%", color: "#f44336" }} />
-            <Typography color="error" variant="subtitle1">
-              Vô hiệu hóa
-            </Typography>
+            {value ? (
+              <>
+                <DeleteIcon sx={{ marginRight: "3%", color: "#f44336" }} />
+                <Typography color="error" variant="subtitle1">
+                  Vô hiệu hóa
+                </Typography>
+              </>
+            ) : (
+              <>
+                <LibraryAddCheckIcon
+                  sx={{ marginRight: "3%", color: "#f44336" }}
+                />
+                <Typography color="error" variant="subtitle1">
+                  Kích hoạt
+                </Typography>
+              </>
+            )}
           </ListItem>
         </List>
       </Popover>
@@ -78,6 +86,7 @@ const Menu = ({ value, id }) => {
         isOpenDelete={isOpenDelete}
         setIsOpenDelete={setIsOpenDelete}
         id={id}
+        value={value}
       />
     </>
   );

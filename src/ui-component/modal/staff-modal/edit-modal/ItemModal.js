@@ -38,6 +38,7 @@ const ItemModal = ({ modalType }) => {
   const [avatar, setAvatar] = useState("");
   const edit = true;
   const [loading, setLoading] = useState(false);
+  const [isDataChanged, setIsDataChanged] = useState(false);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
@@ -52,16 +53,18 @@ const ItemModal = ({ modalType }) => {
 
   const fetchData = async () => {
     setLoading(true);
-    const response = await fetch(
-      `${apiUrl}/staff-account-management/${staffId}`,
-      requestOptions
-    );
+    if (staffId) {
+      const response = await fetch(
+        `${apiUrl}/staff-account-management/${staffId}`,
+        requestOptions
+      );
 
-    const responseData = await response.json();
-    if (responseData) {
-      setData(responseData.data);
+      const responseData = await response.json();
+      if (responseData) {
+        setData(responseData.data);
+      }
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -75,6 +78,8 @@ const ItemModal = ({ modalType }) => {
         ...prevData,
         avatar: avatar,
       }));
+
+      setIsDataChanged(true);
     }
   }, [avatar]);
 
@@ -87,6 +92,7 @@ const ItemModal = ({ modalType }) => {
         ...prevData,
         phone: phoneNumber.substring(0, 10),
       }));
+      setIsDataChanged(true);
     }
   };
 
@@ -96,6 +102,7 @@ const ItemModal = ({ modalType }) => {
       ...prevData,
       dateOfBirth: value,
     }));
+    setIsDataChanged(true);
   };
 
   const handleChangeName = (event) => {
@@ -104,10 +111,7 @@ const ItemModal = ({ modalType }) => {
       ...prevData,
       name: value,
     }));
-  };
-
-  const handleCloseModal = () => {
-    dispatch(closeModal(modalType));
+    setIsDataChanged(true);
   };
 
   const handleChange = (event) => {
@@ -116,9 +120,18 @@ const ItemModal = ({ modalType }) => {
       ...prevData,
       gender: value,
     }));
+    setIsDataChanged(true);
+  };
+
+  const handleCloseModal = () => {
+    dispatch(closeModal(modalType));
   };
 
   const handleSubmit = async () => {
+    if (!isDataChanged) {
+      dispatch(closeModal(modalType)); // Close modal if no changes
+      return;
+    }
     Swal.fire({
       title: "Xác nhận?",
       text: "Bạn có chắc chắn muốn lưu!",
@@ -147,8 +160,9 @@ const ItemModal = ({ modalType }) => {
             method: "PUT",
             body: JSON.stringify(data),
           });
-          const dataRes = await response.json();
-          if (dataRes.statusCode === 204) {
+          // const dataRes = await response.json();
+          if (response.status === 204) {
+            handleCloseModal();
             Swal.fire({
               icon: "success",
               text: "Cập nhật thông tin nhân viên thành công!",
@@ -156,7 +170,7 @@ const ItemModal = ({ modalType }) => {
           } else {
             Swal.fire({
               icon: "error",
-              text: dataRes.message,
+              text: response.message,
             });
           }
         } catch (error) {

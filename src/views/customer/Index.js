@@ -21,7 +21,7 @@ const Customer = () => {
       .then(() => console.log("Connection started!"))
       .catch((err) => console.error("Error: ", err));
 
-    connection.on("LoadCustomerAccountsInAdmin", () => {
+    connection.on("LoadCustomerList", () => {
       fetchData();
     });
 

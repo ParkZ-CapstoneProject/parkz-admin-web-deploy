@@ -47,6 +47,8 @@ const ItemModal = ({ modalType }) => {
     }
   };
 
+  console.log("data", data);
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -207,8 +209,8 @@ const ItemModal = ({ modalType }) => {
                 variant="h3"
                 sx={{ fontSize: "25px" }}
               >
-                {data?.data?.actualPrice
-                  ? formatPrice(data?.data?.actualPrice)
+                {data?.totalPrice
+                  ? formatPrice(data?.totalPrice)
                   : "Chưa tính tiền"}
               </Typography>
             </Grid>
@@ -245,7 +247,7 @@ const ItemModal = ({ modalType }) => {
             <Typography
               color={theme.palette.primary.secondary}
               variant="h3"
-              sx={{ paddingTop: "10px", paddingBottom: "10px" }}
+              sx={{ paddingTop: "7px", paddingBottom: "7px" }}
             >
               Thông tin đơn
             </Typography>
@@ -294,8 +296,8 @@ const ItemModal = ({ modalType }) => {
 
           <Grid item container direction="row" justifyContent="space-between">
             <GridItem
-              title="Số tiền dự tính"
-              value={formatPrice(data?.totalPrice)}
+              title="Tiền chưa thanh toán"
+              value={formatPrice(data?.unPaidMoney)}
             />
           </Grid>
         </Grid>

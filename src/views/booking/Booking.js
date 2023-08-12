@@ -13,7 +13,7 @@ import { ImFilesEmpty } from "react-icons/im";
 const renderCellStatus = (params) => {
   const statusMap = {
     Initial: { label: "Khởi tạo", color: "#fff", bgColor: "gray" },
-    Done: { label: "Hoàn thành", color: "#fff", bgColor: "#4caf50" },
+    Done: { label: "Hoàn thành", color: "#fff", bgColor: "#1e88e5" },
     OverTime: { label: "Quá hạn", color: "#fff", bgColor: "#1976d2" },
     Check_In: { label: "Check in", color: "#fff", bgColor: "#f44336" },
     Check_Out: { label: "Check out", color: "#000", bgColor: "#ff9800" },
@@ -38,6 +38,17 @@ const renderCellStatus = (params) => {
       }}
     />
   );
+};
+
+const formatTime = (dateString) => {
+  const date = new Date(dateString);
+  const timeString = date.toLocaleTimeString("en-US", {
+    hour12: false,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return timeString;
 };
 
 const columns = [
@@ -95,14 +106,18 @@ const columns = [
     headerName: "Giờ vào",
     width: 120,
     valueGetter: (params) =>
-      `${params.row.bookingDtoForAdmin?.checkInTime || "----"}`,
+      params.row.bookingDtoForAdmin?.checkinTime
+        ? `${formatTime(params.row.bookingDtoForAdmin?.checkinTime)}`
+        : "-----",
   },
   {
     field: "checkOutTime",
     headerName: "Giờ ra",
     width: 120,
     valueGetter: (params) =>
-      `${params.row.bookingDtoForAdmin?.checkOutTime || "----"}`,
+      params.row.bookingDtoForAdmin?.checkoutTime
+        ? `${formatTime(params.row.bookingDtoForAdmin?.checkoutTime)}`
+        : "-----",
   },
   {
     field: "status",
