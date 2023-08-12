@@ -38,6 +38,7 @@ const AllSendRequest = (props) => {
     return () => {
       connection.stop();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const requestOptions = {
@@ -75,6 +76,7 @@ const AllSendRequest = (props) => {
         rows.find((row) => row.status === "Tạo_mới").approveParkingId
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows]);
 
   const handleOpenModal = () => {
