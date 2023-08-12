@@ -84,6 +84,8 @@ const NewRequest = () => {
           requestOptions
         );
 
+        console.log("response", response);
+
         if (response.status === 204) {
           Swal.fire({
             icon: "success",
@@ -94,10 +96,11 @@ const NewRequest = () => {
               navigate("/request");
             }
           });
-        } else {
+        }
+        if (response.status === 404) {
           Swal.fire({
             icon: "error",
-            text: response.message,
+            text: "Bãi chưa áp dụng gói cước nên không thể gửi duyệt! Vui lòng áp dụng giá để thử lại!",
           });
           return;
         }

@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Loading from "ui-component/back-drop/Loading";
 import * as signalR from "@microsoft/signalr";
-// import MyParkingPending from "./ParkingPending";
-import { useParams } from "react-router";
 import SendRequest from "./SendRequest";
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -13,7 +11,6 @@ import CreateModal from "ui-component/modal/staff-parking/create/CreateModal";
 const AllSendRequest = (props) => {
   const { parkingId, setIsDone, setApproveId } = props;
   const theme = useTheme();
-  // console.log("businessId", businessId);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -21,8 +18,6 @@ const AllSendRequest = (props) => {
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const signalRUrl = "https://parkzserver-001-site1.btempurl.com/parkz";
   const token = localStorage.getItem("tokenStaff");
-  // const user = localStorage.getItem("admin"); // Set the authentication status here
-  // const userData = JSON.parse(user);
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()

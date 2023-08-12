@@ -9,17 +9,18 @@ import Menu from "./Menu";
 
 export default function SendRequest(props) {
   const { rows } = props;
+  console.log("rows", rows);
 
   const renderCellStatus = (params) => {
-    if (params.value === "Chờ_duyệt") {
+    if (params.row.status === "Chờ_duyệt") {
       return (
         <Chip
-          color="primary"
+          color="secondary"
           label="Chờ_duyệt"
           sx={{ padding: "10px", color: "#fff", fontWeight: "bold" }}
         />
       );
-    } else if (params.value === "Đã_duyệt") {
+    } else if (params.row.status === "Đã_duyệt") {
       return (
         <Chip
           color="success"
@@ -27,11 +28,20 @@ export default function SendRequest(props) {
           sx={{ padding: "8px", color: "#fff", fontWeight: "bold" }}
         />
       );
+    }
+    if (params.row.status === "Tạo_mới") {
+      return (
+        <Chip
+          color="primary"
+          label="Tạo_mới"
+          sx={{ padding: "7px", color: "#fff", fontWeight: "bold" }}
+        />
+      );
     } else {
       return (
         <Chip
-          color="secondary"
-          label={params.value}
+          color="error"
+          label="Từ_chối"
           sx={{ padding: "8px", color: "#fff", fontWeight: "bold" }}
         />
       );
