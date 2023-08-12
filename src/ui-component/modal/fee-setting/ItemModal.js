@@ -23,10 +23,11 @@ const ItemModal = (props) => {
     name: "",
     businessType: "",
     price: 0,
+    numberOfParking: "",
   };
 
   const [data, setData] = useState(defaultData);
-  console.log("data.businessType", data.businessType);
+  // console.log("data.businessType", data.businessType);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
@@ -70,6 +71,14 @@ const ItemModal = (props) => {
     }));
   };
 
+  const handleChangeNumOfParking = (e) => {
+    const { value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      numberOfParking: value,
+    }));
+  };
+
   const handleCloseModal = () => {
     setIsOpen(false);
   };
@@ -85,10 +94,14 @@ const ItemModal = (props) => {
   const handleSave = async (e) => {
     e.preventDefault();
 
-    if (data.name.length === 0 || data.price === 0) {
+    if (
+      data.name.length === 0 ||
+      data.price === 0 ||
+      data.numberOfParking.length === 0
+    ) {
       Swal.fire({
         icon: "warning",
-        text: "Vui lòng nhập tên phí và giá phí!",
+        text: "Vui lòng nhập tên phí, giá phí và số lượng bãi xe có thể có!",
       });
       return;
     }
@@ -118,6 +131,7 @@ const ItemModal = (props) => {
           name: data.name,
           businessType: data.businessType,
           price: data.price,
+          numberOfParking: data.numberOfParking,
         };
 
         const requestOptions = {
@@ -153,6 +167,33 @@ const ItemModal = (props) => {
             icon: "error",
             text: dataRes.message,
           });
+        }
+
+        if (edit) {
+          const requestOptionsEdit = {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `bearer ${token}`,
+            },
+            body: JSON.stringify(request),
+          };
+
+          const responseEdit = await fetch(
+            `${apiUrl}/fee-management`,
+            requestOptionsEdit
+          );
+          if (responseEdit.status === 204) {
+            Swal.fire({
+              icon: "success",
+              text: "Cập nhật dữ liệu thành công!",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              text: responseEdit.message,
+            });
+          }
         }
       }
     });
@@ -311,6 +352,34 @@ const ItemModal = (props) => {
                 min: 1,
               }}
               onChange={handleInputPrice}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid
+          item
+          container
+          xs={9}
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="center"
+        >
+          <Grid item xs={5}>
+            <Typography color={theme.palette.secondary.main} variant="h4">
+              Số lượng bãi xe
+            </Typography>
+          </Grid>
+          <Grid item xs={7}>
+            <TextField
+              fullWidth
+              required
+              label="Số bãi xe"
+              type="text"
+              value={data.numberOfParking}
+              inputProps={{
+                maxLength: 100,
+              }}
+              onChange={handleChangeNumOfParking}
             />
           </Grid>
         </Grid>

@@ -51,6 +51,20 @@ const ItemModal = ({ modalType }) => {
     }
   };
 
+  const calculateAge = (birthdate) => {
+    const today = new Date();
+    const birthDate = new Date(birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
+
   const handleDateOfBirthChange = (e) => {
     setDateOfBirth(e.target.value);
   };
@@ -75,6 +89,39 @@ const ItemModal = ({ modalType }) => {
   const handleRegisterStaff = async (e) => {
     e.preventDefault();
     if (errorEmail) {
+      return;
+    } else if (avatar.trim().length === 0) {
+      Swal.fire({
+        icon: "warning",
+        text: "Vui lòng tải hình đại diện!",
+      });
+    }
+
+    const age = calculateAge(dateOfBirth);
+    if (age < 18) {
+      Swal.fire({
+        icon: "warning",
+        text: "Bạn phải ít nhất 18 tuổi để đăng ký nhân viên.",
+      });
+      return;
+    }
+
+    if (
+      name.trim().length === 0 ||
+      email.trim().length === 0 ||
+      phone.trim().length === 0
+    ) {
+      Swal.fire({
+        icon: "warning",
+        text: "Vui lòng điền tất cả các field!",
+      });
+    }
+
+    if (!dateOfBirth) {
+      Swal.fire({
+        icon: "warning",
+        text: "Vui lòng chọn ngày sinh!",
+      });
       return;
     }
 
@@ -178,7 +225,7 @@ const ItemModal = ({ modalType }) => {
         >
           <Grid item xs={5}>
             <Typography color={theme.palette.secondary.main} variant="h4">
-              Tên NV
+              Tên nhân viên
             </Typography>
           </Grid>
           <Grid item xs={7}>
@@ -210,7 +257,10 @@ const ItemModal = ({ modalType }) => {
               type="date"
               value={dateOfBirth}
               onChange={handleDateOfBirthChange}
-              // inputProps={{ step: 1 }}
+              error={calculateAge(dateOfBirth) < 18}
+              helperText={
+                calculateAge(dateOfBirth) < 18 ? "Ít nhất 18 tuổi" : ""
+              }
             />
           </Grid>
         </Grid>

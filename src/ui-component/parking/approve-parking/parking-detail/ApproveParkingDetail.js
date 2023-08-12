@@ -202,7 +202,7 @@ const ApproveParkingDetail = (props) => {
             </Grid>
             <Grid item>
               <Typography color={theme.palette.common.dark} variant="subtitle1">
-                Chưa áp dụng giá
+                {data?.parkingPrices}
               </Typography>
             </Grid>
           </Grid>

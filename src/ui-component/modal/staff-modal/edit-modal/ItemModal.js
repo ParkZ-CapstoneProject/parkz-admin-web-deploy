@@ -39,6 +39,7 @@ const ItemModal = ({ modalType }) => {
   const edit = true;
   const [loading, setLoading] = useState(false);
   const [isDataChanged, setIsDataChanged] = useState(false);
+  // console.log("data.dateOfBirth", typeof data.dateOfBirth);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
@@ -98,10 +99,14 @@ const ItemModal = ({ modalType }) => {
 
   const handleDateOfBirthChange = (event) => {
     const { value } = event.target;
+    // Check if the value is non-empty before setting it in the state
+    const newDateOfBirth = value || ""; // If value is falsy, set it to an empty string
+
     setData((prevData) => ({
       ...prevData,
-      dateOfBirth: value,
+      dateOfBirth: newDateOfBirth,
     }));
+
     setIsDataChanged(true);
   };
 
@@ -127,11 +132,61 @@ const ItemModal = ({ modalType }) => {
     dispatch(closeModal(modalType));
   };
 
+  const calculateAge = (birthdate) => {
+    const today = new Date();
+    const birthDate = new Date(birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
+
   const handleSubmit = async () => {
     if (!isDataChanged) {
       dispatch(closeModal(modalType)); // Close modal if no changes
       return;
     }
+    if (data.avatar.length === 0) {
+      Swal.fire({
+        icon: "warning",
+        text: "Vui lòng tải hình đại diện!",
+      });
+    }
+
+    const age = calculateAge(data.dateOfBirth);
+    if (age < 18) {
+      Swal.fire({
+        icon: "warning",
+        text: "Bạn phải ít nhất 18 tuổi để đăng ký nhân viên.",
+      });
+      return;
+    }
+
+    if (
+      data.name.length === 0 ||
+      data.email.length === 0 ||
+      data.phone.length === 0
+    ) {
+      Swal.fire({
+        icon: "warning",
+        text: "Vui lòng điền tất cả các ô dữ liệu!",
+      });
+    }
+
+    if (!data.dateOfBirth) {
+      // Check if dateOfBirth is empty
+      Swal.fire({
+        icon: "warning",
+        text: "Vui lòng chọn ngày sinh!",
+      });
+      return;
+    }
+
     Swal.fire({
       title: "Xác nhận?",
       text: "Bạn có chắc chắn muốn lưu!",
@@ -160,6 +215,7 @@ const ItemModal = ({ modalType }) => {
             method: "PUT",
             body: JSON.stringify(data),
           });
+          console.log("response", response.json());
           // const dataRes = await response.json();
           if (response.status === 204) {
             handleCloseModal();
@@ -213,13 +269,13 @@ const ItemModal = ({ modalType }) => {
         >
           <Grid item xs={5}>
             <Typography color={theme.palette.secondary.main} variant="h4">
-              Tên NV
+              Tên nhân viên
             </Typography>
           </Grid>
           <Grid item xs={7}>
             <TextField
               fullWidth
-              label="Tên NV"
+              label="Nhân viên"
               type="text"
               value={data.name}
               onChange={handleChangeName}
@@ -289,10 +345,13 @@ const ItemModal = ({ modalType }) => {
           <Grid item xs={7}>
             <TextField
               fullWidth
-              type="number"
+              type="text"
               label="SĐT"
               value={data.phone}
               onChange={handleInputPhone}
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </Grid>
         </Grid>
