@@ -299,14 +299,14 @@ const ItemModal = ({ modalType }) => {
         >
           <Grid item xs={5}>
             <Typography color={theme.palette.secondary.main} variant="h4">
-              SĐT
+              Số điện thoại
             </Typography>
           </Grid>
           <Grid item xs={7}>
             <TextField
               fullWidth
               type="number"
-              label="SĐT"
+              label="Số điện thoại"
               value={phone}
               onChange={handleInputPhone}
             />

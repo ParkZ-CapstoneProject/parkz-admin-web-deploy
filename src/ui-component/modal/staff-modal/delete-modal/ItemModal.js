@@ -217,7 +217,7 @@ const ItemModal = ({ modalType }) => {
         >
           <Grid item xs={5}>
             <Typography color={theme.palette.secondary.main} variant="h4">
-              SĐT
+              Số điện thoại
             </Typography>
           </Grid>
           <Grid item xs={7}>

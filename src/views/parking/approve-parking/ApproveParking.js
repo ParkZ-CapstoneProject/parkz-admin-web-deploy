@@ -85,14 +85,14 @@ const ApproveParking = () => {
         };
 
         Swal.fire({
-          icon: "question",
-          title: "Đang xử lý...",
-          onBeforeOpen: () => {
+          icon: "info",
+          title: "Đang xử lý thông tin...",
+          text: "Vui lòng chờ trong giây lát!",
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          didOpen: () => {
             Swal.showLoading();
           },
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-          allowEnterKey: false,
         });
 
         let response;
