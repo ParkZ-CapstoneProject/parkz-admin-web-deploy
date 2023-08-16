@@ -2,20 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Chip, Grid, Rating, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Loading from "ui-component/back-drop/Loading";
+import { BsEyeFill } from "react-icons/bs";
+import ParkingPriceDetail from "ui-component/modal/parking-price-detail/ParkingPriceDetail";
 
 const ApproveParkingDetail = (props) => {
   const { parkingId } = props;
   const theme = useTheme();
   const [data, setData] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
+  const tokenStaff = localStorage.getItem("tokenStaff");
   const [loading, setLoading] = useState(false);
 
   const requestOptions = {
     method: "GET",
     headers: {
-      Authorization: `bearer ${token}`, // Replace `token` with your actual bearer token
+      Authorization: `bearer ${token ? token : tokenStaff}`, // Replace `token` with your actual bearer token
       "Content-Type": "application/json", // Replace with the appropriate content type
     },
   };
@@ -35,6 +39,10 @@ const ApproveParkingDetail = (props) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleOpenParkingPrices = () => {
+    setIsOpen(true);
+  };
 
   if (loading) {
     return <Loading loading={loading} />;
@@ -57,7 +65,7 @@ const ApproveParkingDetail = (props) => {
             </Grid>
             <Grid item>
               <Typography color={theme.palette.common.dark} variant="subtitle1">
-                {data?.parkingId}
+                {data?.businessId}
               </Typography>
             </Grid>
           </Grid>
@@ -199,10 +207,20 @@ const ApproveParkingDetail = (props) => {
               <Typography color={theme.palette.common.dark} variant="h4">
                 Gói cước
               </Typography>
+              <BsEyeFill
+                style={{
+                  cursor: "pointer",
+                  marginTop: "-20px",
+                  marginLeft: "75px",
+                  color: "#2196f3",
+                  fontSize: "20px",
+                }}
+                onClick={handleOpenParkingPrices}
+              />
             </Grid>
             <Grid item>
               <Typography color={theme.palette.common.dark} variant="subtitle1">
-                {data?.parkingPrices}
+                {data?.listParkingPrices[0].parkingPriceName}
               </Typography>
             </Grid>
           </Grid>
@@ -238,6 +256,12 @@ const ApproveParkingDetail = (props) => {
       ) : (
         <></>
       )}
+
+      <ParkingPriceDetail
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        parkingPriceId={data?.listParkingPrices[0].parkingPriceId}
+      />
     </>
   );
 };
