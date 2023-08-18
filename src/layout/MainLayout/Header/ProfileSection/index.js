@@ -76,7 +76,7 @@ const ProfileSection = () => {
 
   const fetchData = async () => {
     const response = await fetch(
-      `${apiUrl}/staff-account-management/${staffData._id}`,
+      `${apiUrl}/staff-account-management/${staffData?._id}`,
       requestOptions
     );
 
@@ -87,7 +87,9 @@ const ProfileSection = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (token) {
+      fetchData();
+    }
   }, []);
 
   const handleClose = (event) => {
