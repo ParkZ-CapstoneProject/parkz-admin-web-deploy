@@ -231,7 +231,7 @@ const ItemModal = ({ modalType }) => {
           <Grid item xs={7}>
             <TextField
               fullWidth
-              label="Tên NV"
+              label="Tên nhân viên"
               type="text"
               value={name}
               onChange={handleChangeName}
