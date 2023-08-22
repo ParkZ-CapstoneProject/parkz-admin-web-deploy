@@ -21,7 +21,6 @@ const NewRequest = () => {
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
-    console.log("tabId", tabId);
   };
 
   const tabs = [
@@ -83,8 +82,6 @@ const NewRequest = () => {
           `${apiUrl}/request/approve-parkings/parking/send-request/${approveId}`,
           requestOptions
         );
-
-        console.log("response", response);
 
         if (response.status === 204) {
           Swal.fire({

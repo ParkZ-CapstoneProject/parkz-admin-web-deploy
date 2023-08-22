@@ -20,7 +20,6 @@ const Dashboard = () => {
   const [totalAccount, setTotalAccount] = useState([]);
   const [revenueData, setRevenueData] = useState([]);
   const [user, setUser] = useState([]);
-  console.log("revenueData", revenueData);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
@@ -47,7 +46,6 @@ const Dashboard = () => {
       requestOptions
     );
     const dataCus = await responseCus.json();
-    // console.log("dataCus", dataCus.data);
     if (dataCus) {
       setUser(dataCus.data);
     }

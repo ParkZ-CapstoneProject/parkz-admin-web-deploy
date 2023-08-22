@@ -31,8 +31,6 @@ const FloorParking = (props) => {
         requestOptions
       );
       const data = await response.json();
-      console.log("data slots: ", data.data);
-      // console.log("data slots", data);
       return data.data;
     };
 
@@ -43,7 +41,6 @@ const FloorParking = (props) => {
       );
       const data = await response.json();
       const fetchedFloors = data.data;
-      // console.log("fetchedFloors", fetchedFloors);
 
       // Fetch car slots for each floor
       const updatedFloors = await Promise.all(

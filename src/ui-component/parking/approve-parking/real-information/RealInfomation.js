@@ -28,7 +28,6 @@ const RealInformation = (props) => {
     );
 
     const data = await response.json();
-    console.log("data", data.data.images);
     setData(data.data);
     setLoading(false);
   };

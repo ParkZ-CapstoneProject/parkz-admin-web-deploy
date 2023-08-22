@@ -27,7 +27,6 @@ const CreateNewParking = () => {
   const token = localStorage.getItem("tokenAdmin");
   const user = localStorage.getItem("admin"); // Set the authentication status here
   const userData = JSON.parse(user);
-  // console.log("userData", Number(userData._id));
 
   const navigate = useNavigate();
 
@@ -191,7 +190,6 @@ const CreateNewParking = () => {
     const response = await fetch(`${apiUrl}/parkings/parking`, requestOptions);
 
     const data = await response.json();
-    console.log("data", data);
     localStorage.setItem("parkingId", data.data);
     return data.data;
   };
@@ -216,12 +214,9 @@ const CreateNewParking = () => {
 
       return fetch(`${apiUrl}/parking-spot-image`, requestOptions)
         .then((response) => {
-          console.log("response", response);
           return response.json();
         })
-        .then((data) => {
-          console.log("data", data);
-        });
+        .then((data) => {});
     });
 
     return Promise.all(uploadPromises).then(() => {
@@ -243,7 +238,6 @@ const CreateNewParking = () => {
               resolve(data.link);
             })
             .catch((error) => {
-              console.log("Error uploading image:", error);
               reject(error);
             });
         });
@@ -254,7 +248,6 @@ const CreateNewParking = () => {
           resolve(imageUrls); // resolve the Promise with the array of image URLs
         })
         .catch((error) => {
-          console.log("Error uploading images:", error);
           reject(error); // reject the Promise
         });
     });

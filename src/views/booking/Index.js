@@ -28,7 +28,6 @@ const Booking = () => {
     );
     const data = await response.json();
     setRows(data.data);
-    console.log("data.data", data.data);
     setLoading(false);
   };
 

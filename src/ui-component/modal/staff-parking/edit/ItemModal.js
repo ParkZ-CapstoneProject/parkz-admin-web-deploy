@@ -141,7 +141,6 @@ const ItemModal = (props) => {
           return new Promise((resolve, reject) => {
             const formData = new FormData();
             formData.append("file", file.originFileObj, file.name);
-            console.log("formData", formData);
             // axios
             //   .post(`${apiUrl}/upload-image`, formData)
             //   .then((response) => {
@@ -165,11 +164,6 @@ const ItemModal = (props) => {
       //   });
     });
   };
-
-  useEffect(() => {
-    const data = imageList.filter((file) => !file.url);
-    console.log("data", data);
-  }, [imageList]);
 
   return (
     <>

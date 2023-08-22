@@ -14,29 +14,6 @@ const ApproveParking = () => {
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
-  // const user = localStorage.getItem("admin"); // Set the authentication status here
-  // const userData = JSON.parse(user);
-
-  //   useEffect(() => {
-  //     const connection = new signalR.HubConnectionBuilder()
-  //       .withUrl("http://parkzwebapiver2-001-site1.ctempurl.com/parkz")
-  //       .build();
-
-  //     connection
-  //       .start()
-  //       .then(() => console.log("Connection started!"))
-  //       .catch((err) => console.error("Error: ", err));
-
-  //     connection.on("LoadApproveParkingList", () => {
-  //       fetchData();
-  //     });
-
-  //     fetchData();
-
-  //     return () => {
-  //       connection.stop();
-  //     };
-  //   }, []);
 
   useEffect(() => {
     fetchData();

@@ -27,15 +27,11 @@ const BusinessInfor = () => {
   const dispatch = useDispatch();
   const currentStep = useSelector((state) => state.multiStep.currentStep);
   const userData = useSelector((state) => state.multiStep.userData);
-  console.log("userData", userData);
   const [isChecked, setIsChecked] = useState(false);
   const [isAgree, setIsAgree] = useState(false);
   const [businessLicenseUrl, setBusinessLicenseUrl] = useState([]);
 
   const [errorBusinessName, setErrorBusinessName] = useState(false);
-  // console.log("userData[front]", userData["frontSide"]);
-  // console.log("userData[back]", userData["backSide"]);
-  // console.log("userData[avatar]", userData["avatar"]);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
 
@@ -125,8 +121,6 @@ const BusinessInfor = () => {
           });
           Swal.close();
           dispatch(setCurrentStep(currentStep + 1));
-
-          console.log(data);
         })
         .catch((error) => {
           // Handle any errors

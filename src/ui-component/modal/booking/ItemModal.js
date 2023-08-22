@@ -11,7 +11,6 @@ import Loading from "ui-component/back-drop/Loading";
 const ItemModal = ({ modalType }) => {
   const theme = useTheme();
   const { bookingId } = useSelector((state) => state.modal);
-  // console.log("bookingId", bookingId);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -34,7 +33,6 @@ const ItemModal = ({ modalType }) => {
       requestOptions
     );
     const data = await response.json();
-    // console.log("booking", data.data);
 
     if (data.data) {
       setData(data.data);
@@ -46,8 +44,6 @@ const ItemModal = ({ modalType }) => {
       });
     }
   };
-
-  console.log("data", data);
 
   useEffect(() => {
     fetchData();

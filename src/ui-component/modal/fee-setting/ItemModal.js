@@ -27,7 +27,6 @@ const ItemModal = (props) => {
   };
 
   const [data, setData] = useState(defaultData);
-  // console.log("data.businessType", data.businessType);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");

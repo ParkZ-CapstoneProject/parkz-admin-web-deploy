@@ -11,13 +11,10 @@ const Menu = ({ approveParkingId }) => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-
-    // console.log("parkingId", parkingId);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    // dispatch(openModal());
   };
 
   const handleEdit = () => {
@@ -50,18 +47,6 @@ const Menu = ({ approveParkingId }) => {
               Chỉnh sửa
             </Typography>
           </ListItem>
-          {/* <ListItem onClick={handleApprove}>
-            <AddBoxIcon sx={{ marginRight: "3%", color: "#673ab7" }} />
-            <Typography color="secondary" variant="subtitle1">
-              Tạo yêu cầu
-            </Typography>
-          </ListItem> */}
-          {/* <ListItem onClick={handleOpenModalDelete}>
-            <DeleteIcon sx={{ marginRight: "3%", color: "#f44336" }} />
-            <Typography color="error" variant="subtitle1">
-              Vô hiệu hóa
-            </Typography>
-          </ListItem> */}
         </List>
       </Popover>
 

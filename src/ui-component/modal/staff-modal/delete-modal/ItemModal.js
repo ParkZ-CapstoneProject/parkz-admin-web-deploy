@@ -103,7 +103,7 @@ const ItemModal = ({ modalType }) => {
           })
           .then((data) => {
             // Handle response data
-            console.log(data);
+            return data;
           })
           .catch((error) => {
             // Handle error

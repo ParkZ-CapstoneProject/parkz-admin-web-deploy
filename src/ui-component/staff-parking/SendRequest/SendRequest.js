@@ -1,15 +1,11 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Chip, Switch, Typography } from "@mui/material";
-import Swal from "sweetalert2";
-// import { useNavigate } from "react-router";
+import { Chip, Typography } from "@mui/material";
 import { ImFilesEmpty } from "react-icons/im";
 import Menu from "./Menu";
-// import Menu from "ui-component/parking-pending/Menu";
 
 export default function SendRequest(props) {
   const { rows } = props;
-  console.log("rows", rows);
 
   const renderCellStatus = (params) => {
     if (params.row.status === "Chờ_duyệt") {

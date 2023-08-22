@@ -26,7 +26,6 @@ export default function MapParking(props) {
   const handleMapClick = (e) => {
     setMarkerPosition([e.latlng.lat, e.latlng.lng]);
     setSearchResult(null);
-    // console.log(e.latlng.lat, e.latlng.lng);
   };
 
   useEffect(() => {

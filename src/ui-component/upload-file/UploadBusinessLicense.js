@@ -20,7 +20,6 @@ const UploadBusinessLicense = () => {
         const blob = await fetch(e.target.result).then((res) => res.blob());
         const formData = new FormData();
         formData.append("file", blob, "filename.png");
-        console.log(formData);
         axios
           .post("https://parkzapi.azurewebsites.net/api/upload-image", formData)
           .then((response) => {

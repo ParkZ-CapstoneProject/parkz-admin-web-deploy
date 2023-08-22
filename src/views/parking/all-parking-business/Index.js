@@ -6,10 +6,8 @@ import * as signalR from "@microsoft/signalr";
 
 const ParkingAll = (props) => {
   const { businessId } = props;
-  // console.log("businessId", businessId);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log("rows", rows);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");

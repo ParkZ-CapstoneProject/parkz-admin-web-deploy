@@ -15,7 +15,6 @@ const getBase64 = (file) =>
 
 const UploadFileImage = (props) => {
   const { imageList, setImageList, setLength, images } = props;
-  console.log("imageList", imageList);
 
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -70,7 +69,6 @@ const UploadFileImage = (props) => {
 
   const handleRemove = async (file) => {
     if (file.url && images.some((img) => img.url === file.url)) {
-      console.log("this is a images");
       // If it's an image from props, remove it with API method DELETE
       try {
         // Make a DELETE request to the API endpoint with the image URL as a parameter

@@ -28,7 +28,6 @@ const ParkingDetailInfo = () => {
     const response = await fetch(`${apiUrl}/parkings/${id}`, requestOptions);
 
     const data = await response.json();
-    console.log("data", data);
     if (data.data) {
       setData(data.data.parkingEntity);
       setLoading(false);
@@ -47,7 +46,6 @@ const ParkingDetailInfo = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  // console.log("data log", data?.description);
 
   if (loading) {
     return <Loading loading={loading} />;

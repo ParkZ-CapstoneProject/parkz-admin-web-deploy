@@ -14,10 +14,8 @@ const ParkingModalInFloor = () => {
   const navigate = useNavigate();
 
   const initialFloorsObj = loadState();
-  console.log("initialFloorsObj", initialFloorsObj);
 
   const initialFloorsArr = Object.values(initialFloorsObj);
-  console.log("initialFloorsArr", initialFloorsArr);
 
   const dispatch = useDispatch();
   const [floors, setFloors] = useState(() => {

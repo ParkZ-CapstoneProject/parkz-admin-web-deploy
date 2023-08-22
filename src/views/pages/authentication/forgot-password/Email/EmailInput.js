@@ -25,7 +25,6 @@ const EmailInput = () => {
   const navigate = useNavigate();
 
   const apiLink = "https://parkzserver-001-site1.btempurl.com/api";
-  // console.log("apiLink", apiLink);
 
   const handleInputEmail = (event) => {
     const { value } = event.target;
@@ -38,7 +37,6 @@ const EmailInput = () => {
     } else {
       setErrorEmail(true);
     }
-    // setSpaceInput(newEmail.trim().length === 0);
   };
 
   const handleSubmit = async (event) => {
@@ -49,7 +47,6 @@ const EmailInput = () => {
     const data = await response.json();
 
     if (data.message !== "Thành công") {
-      console.log("success", data.data);
       Swal.fire({
         icon: "error",
         title: "Không tìm thấy",

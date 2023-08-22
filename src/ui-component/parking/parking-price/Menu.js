@@ -38,12 +38,6 @@ const Menu = ({ id }) => {
         }}
       >
         <List sx={{ width: "130px" }}>
-          {/* <ListItem onClick={() => console.log("first")}>
-            <EditIcon sx={{ marginRight: "3%", color: "#2196f3" }} />
-            <Typography color="primary" variant="subtitle1">
-              Chỉnh sửa
-            </Typography>
-          </ListItem> */}
           <ListItem onClick={() => navigate(`/price-detail/${id}`)}>
             <RemoveRedEyeIcon sx={{ marginRight: "3%", color: "#673ab7" }} />
             <Typography color="secondary" variant="subtitle1">

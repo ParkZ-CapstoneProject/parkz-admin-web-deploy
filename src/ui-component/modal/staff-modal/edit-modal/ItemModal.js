@@ -39,7 +39,6 @@ const ItemModal = ({ modalType }) => {
   const edit = true;
   const [loading, setLoading] = useState(false);
   const [isDataChanged, setIsDataChanged] = useState(false);
-  // console.log("data.dateOfBirth", typeof data.dateOfBirth);
 
   const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
   const token = localStorage.getItem("tokenAdmin");
@@ -71,7 +70,6 @@ const ItemModal = ({ modalType }) => {
   useEffect(() => {
     fetchData();
   }, []);
-  // console.log("data.avatar", data.avatar);
 
   useEffect(() => {
     if (avatar) {
@@ -215,7 +213,6 @@ const ItemModal = ({ modalType }) => {
             method: "PUT",
             body: JSON.stringify(data),
           });
-          console.log("response", response.json());
           // const dataRes = await response.json();
           if (response.status === 204) {
             handleCloseModal();

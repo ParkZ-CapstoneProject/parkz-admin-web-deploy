@@ -5,8 +5,6 @@ import Loading from "ui-component/back-drop/Loading";
 import * as signalR from "@microsoft/signalr";
 
 const ParkingAll = (props) => {
-  // const { businessId } = props;
-  // console.log("businessId", businessId);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
 

@@ -123,7 +123,6 @@ const ItemModal = (props) => {
           },
         });
         const imageUrls = await handleUploadAllImage();
-        // console.log("imageUrls", imageUrls);
         if (!isEdit) {
           handleCreateNewApprove(imageUrls);
         } else {
@@ -155,7 +154,6 @@ const ItemModal = (props) => {
       `${apiUrl}/request/approve-parkings/parking`,
       requestOptions
     );
-    // console.log("response", response);
     const dataRes = await response.json();
     if (dataRes.data) {
       localStorage.setItem("newApproveId", dataRes.data);
@@ -268,7 +266,6 @@ const ItemModal = (props) => {
                 resolve(data.link);
               })
               .catch((error) => {
-                console.log("Error uploading image:", error);
                 reject(error);
               });
           });
@@ -279,7 +276,6 @@ const ItemModal = (props) => {
           resolve(imageUrls); // resolve the Promise with the array of image URLs
         })
         .catch((error) => {
-          console.log("Error uploading images:", error);
           reject(error); // reject the Promise
         });
     });

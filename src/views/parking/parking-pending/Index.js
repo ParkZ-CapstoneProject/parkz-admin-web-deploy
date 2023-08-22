@@ -5,8 +5,6 @@ import * as signalR from "@microsoft/signalr";
 import MyParkingPending from "./ParkingPending";
 
 const ParkingAll = (props) => {
-  // const { businessId } = props;
-  // console.log("businessId", businessId);
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
 

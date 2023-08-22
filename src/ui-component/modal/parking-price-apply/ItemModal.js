@@ -15,10 +15,8 @@ import CancelButton from "ui-component/buttons/cancel-button/CancelButton";
 import Swal from "sweetalert2";
 
 const ItemModal = ({ setIsOpen, priceId, priceName, isDetail }) => {
-  //   console.log("priceId", priceId);
   const theme = useTheme();
 
-  const [parkings, setParkings] = useState([]);
   const [parkingId, setParkingId] = useState();
   const [parkingOfPrice, setParkingOfPrice] = useState([]);
 
@@ -34,16 +32,6 @@ const ItemModal = ({ setIsOpen, priceId, priceName, isDetail }) => {
       "Content-Type": "application/json", // Replace with the appropriate content type
     },
   };
-
-  // const fetchDataParking = async () => {
-  //   const response = await fetch(
-  //     `${apiUrl}/parkings?managerId=${userData._id}&pageNo=1&pageSize=22`,
-  //     requestOptions
-  //   );
-
-  //   const data = await response.json();
-  //   setParkings(data.data);
-  // };
 
   const fetchDataParkingOfPrice = async () => {
     const response = await fetch(

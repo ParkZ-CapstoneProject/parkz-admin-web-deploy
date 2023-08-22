@@ -21,7 +21,6 @@ const FormInput = ({ floorIndex }) => {
   const handleNumCarRowsChange = (e) => {
     const newNumCarRows = Number(e.target.value);
     const largestCarRow = Math.max(...carSlots.map((slot) => slot.row));
-    // console.log("largestCarRow", largestCarRow);
 
     // Ensure the new number of car rows is greater than or equal to 1
     if (newNumCarRows < 1) {

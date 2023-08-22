@@ -10,8 +10,6 @@ const Menu = ({ id, parkingId }) => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-
-    console.log("parkingId", parkingId);
   };
 
   const handleClose = () => {
@@ -42,12 +40,6 @@ const Menu = ({ id, parkingId }) => {
         }}
       >
         <List sx={{ width: "140px" }}>
-          {/* <ListItem onClick={() => handleOpenModalEdit("modalStaffEdit")}>
-            <EditIcon sx={{ marginRight: "3%", color: "#2196f3" }} />
-            <Typography color="primary" variant="subtitle1">
-              Chỉnh sửa
-            </Typography>
-          </ListItem> */}
           <ListItem onClick={handleApprove}>
             <AssignmentTurnedInIcon
               sx={{ marginRight: "3%", color: "#673ab7" }}
@@ -56,26 +48,8 @@ const Menu = ({ id, parkingId }) => {
               Duyệt bãi
             </Typography>
           </ListItem>
-          {/* <ListItem onClick={handleOpenModalDelete}>
-            <DeleteIcon sx={{ marginRight: "3%", color: "#f44336" }} />
-            <Typography color="error" variant="subtitle1">
-              Vô hiệu hóa
-            </Typography>
-          </ListItem> */}
         </List>
       </Popover>
-
-      {/* <DetailModalCustomer
-        isOpenDetail={isOpenDetail}
-        setIsOpenDetail={setIsOpenDetail}
-        id={id}
-      /> */}
-      {/* <DetailModalStaff modalType="modalStaffDetail" /> */}
-      {/* <DeleteModalCustomer
-        isOpenDelete={isOpenDelete}
-        setIsOpenDelete={setIsOpenDelete}
-        id={id}
-      /> */}
     </>
   );
 };

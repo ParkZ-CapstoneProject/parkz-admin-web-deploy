@@ -22,7 +22,6 @@ const NewPassword = () => {
   const { email } = location.state;
 
   const navigate = useNavigate();
-  // console.log(formData);
   const [newMk, setNewMk] = useState();
   const [errorNewMk, setErrorNewMk] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
@@ -36,23 +35,18 @@ const NewPassword = () => {
     if (!value.includes(" ")) {
       setNewMk(value);
       setErrorNewMk(false);
-      // setPasswordsMatch(event.target.value === confirmPassword);
     } else {
       setErrorNewMk(true);
     }
-    // setSpaceInput(event.target.value.trim() === 0);
   };
 
   const handleConfirmPasswordChange = (event) => {
-    // setSpaceInput(event.target.value.trim() === 0);
-    // setConfirmPassword(event.target.value);
     setPasswordsMatch(event.target.value === newMk);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
 
     let passwordEntity = { email: email, newPassword: newMk };
-    console.log("Email:", passwordEntity.email);
     fetch(`${apiLink}/password-management/forgot-password`, {
       method: "PUT",
       headers: {
@@ -68,14 +62,12 @@ const NewPassword = () => {
       })
       .then((data) => {
         if (data === 204) {
-          console.log("Thành công");
           Swal.fire({
             icon: "success",
             text: "Cập nhật mật khẩu thành công!",
           });
           navigate("/login");
         } else {
-          console.log(data);
         }
       })
       .catch((error) => {

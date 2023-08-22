@@ -5,24 +5,12 @@ import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchBox(props) {
   const { setSearchResult } = props;
-  // const [listPlace, setListPlace] = useState([]);
   const [inputActive, setInputActive] = useState(false);
   const address = localStorage.getItem("address") || "";
-  // console.log("address", address);
 
   const [searchText, setSearchText] = useState(address);
 
   const mapRef = useRef();
-
-  //   const inputContainerStyles = {
-  //     display: "flex",
-  //     alignItems: "center",
-  //     height: "2.5em",
-  //     padding: "5px 0px 5px 10px",
-  //     "& .Mui-focused $searchButton": {
-  //       color: "#000", // Change button color when input is focused
-  //     },
-  //   };
 
   const inputStyles = {
     width: "100%",
