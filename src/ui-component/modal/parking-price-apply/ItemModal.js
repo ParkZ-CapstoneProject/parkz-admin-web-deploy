@@ -187,7 +187,7 @@ const ItemModal = ({ setIsOpen, priceId, priceName, isDetail }) => {
               Bãi xe
             </Typography>
           </Grid>
-          <Grid item xs={7}>
+          {/* <Grid item xs={7}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Bãi xe</InputLabel>
               <Select
@@ -215,7 +215,7 @@ const ItemModal = ({ setIsOpen, priceId, priceName, isDetail }) => {
                   ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
 
