@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import Loading from "ui-component/back-drop/Loading";
 import { BsEyeFill } from "react-icons/bs";
 import ParkingPriceDetail from "ui-component/modal/parking-price-detail/ParkingPriceDetail";
+import Swal from "sweetalert2";
 
 const ApproveParkingDetail = (props) => {
   const { parkingId } = props;
@@ -32,8 +33,15 @@ const ApproveParkingDetail = (props) => {
     );
 
     const data = await response.json();
-    setData(data.data);
-    setLoading(false);
+    if (data) {
+      setData(data.data);
+      setLoading(false);
+    } else {
+      Swal.fire({
+        icon: "error",
+        text: data.message,
+      });
+    }
   };
   useEffect(() => {
     fetchData();
@@ -206,20 +214,26 @@ const ApproveParkingDetail = (props) => {
               <Typography color={theme.palette.common.dark} variant="h4">
                 Gói cước
               </Typography>
-              <BsEyeFill
-                style={{
-                  cursor: "pointer",
-                  marginTop: "-20px",
-                  marginLeft: "75px",
-                  color: "#2196f3",
-                  fontSize: "20px",
-                }}
-                onClick={handleOpenParkingPrices}
-              />
+              {data?.listParkingPrices[0]?.parkingPriceName ? (
+                <BsEyeFill
+                  style={{
+                    cursor: "pointer",
+                    marginTop: "-20px",
+                    marginLeft: "75px",
+                    color: "#2196f3",
+                    fontSize: "20px",
+                  }}
+                  onClick={handleOpenParkingPrices}
+                />
+              ) : (
+                <></>
+              )}
             </Grid>
             <Grid item>
               <Typography color={theme.palette.common.dark} variant="subtitle1">
-                {data?.listParkingPrices[0].parkingPriceName}
+                {data?.listParkingPrices[0]?.parkingPriceName
+                  ? data?.listParkingPrices[0]?.parkingPriceName
+                  : "Chưa áp dụng giá"}
               </Typography>
             </Grid>
           </Grid>
@@ -259,7 +273,7 @@ const ApproveParkingDetail = (props) => {
       <ParkingPriceDetail
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        parkingPriceId={data?.listParkingPrices[0].parkingPriceId}
+        parkingPriceId={data?.listParkingPrices[0]?.parkingPriceId}
       />
     </>
   );
