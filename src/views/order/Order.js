@@ -10,13 +10,23 @@ const getCellValue = (params) => {
 };
 
 const renderCellStatus = (value) => {
-  return (
-    <Chip
-      color="success"
-      label={value}
-      sx={{ padding: "10px", color: "#fff", fontWeight: "bold" }}
-    />
-  );
+  if (value === "Chờ_Thanh_Toán") {
+    return (
+      <Chip
+        color="warning"
+        label={value}
+        sx={{ padding: "10px", color: "#fff", fontWeight: "bold" }}
+      />
+    );
+  } else {
+    return (
+      <Chip
+        color="success"
+        label={value}
+        sx={{ padding: "10px", color: "#fff", fontWeight: "bold" }}
+      />
+    );
+  }
 };
 
 const formatDate = (time) => {
