@@ -13,7 +13,7 @@ const renderCellStatus = (value) => {
   if (value === "Chờ_Thanh_Toán") {
     return (
       <Chip
-        color="warning"
+        color="error"
         label={value}
         sx={{ padding: "10px", color: "#fff", fontWeight: "bold" }}
       />
