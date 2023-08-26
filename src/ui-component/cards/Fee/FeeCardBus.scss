@@ -1,9 +1,9 @@
 .card {
-  width: 600px;
+  width: 500px;
   height: 350px;
   background: white;
   border-radius: 30px;
-  box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+  box-shadow: 15px 15px 30px #a37e7e, -15px -15px 30px #ffffff;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -13,7 +13,7 @@
   height: 35%;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  background: linear-gradient(#d4ab9d, #606ad3);
+  background: linear-gradient(#d5389b, #e980bf);
   display: flex;
   align-items: top;
   justify-content: right;
@@ -60,7 +60,7 @@
 }
 
 .text .h3 {
-  font-family: "Lucida Sans" sans-serif;
+  // font-family: "Lucida Sans" sans-serif;
   font-size: 25px;
   font-weight: 600;
   color: black;
@@ -68,7 +68,7 @@
 }
 
 .text .p {
-  font-family: "Lucida Sans" sans-serif;
+  // font-family: "Lucida Sans" sans-serif;
   color: #000;
   font-weight: 600;
   margin-top: 20px;
@@ -76,7 +76,7 @@
 }
 
 .text .type {
-  font-family: "Lucida Sans" sans-serif;
+  // font-family: "Lucida Sans" sans-serif;
   color: #000;
   font-weight: 500;
   font-size: 25px;
@@ -93,10 +93,12 @@
   font-size: 35px;
   font-weight: 700;
   padding: 10px;
+  color: #d4ab9d;
 }
 
 .price .month {
   font-weight: 510;
   font-size: 22px;
   margin-top: 6px;
+  color: #d4ab9d;
 }

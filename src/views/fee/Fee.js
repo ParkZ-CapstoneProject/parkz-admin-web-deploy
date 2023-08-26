@@ -68,6 +68,8 @@ const Fee = () => {
     return <Loading loading={loading} />;
   }
 
+  console.log("data", data);
+
   return (
     <>
       <MainCard title="Cước phí">

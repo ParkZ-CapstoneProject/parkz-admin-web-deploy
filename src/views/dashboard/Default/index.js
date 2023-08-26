@@ -74,7 +74,7 @@ const Dashboard = () => {
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12} lg={4} sm={6} md={3}>
         <AppWidgetSummary
-          title="Tổng account doanh nghiệp"
+          title="Tổng tài khoản doanh nghiệp"
           total={totalAccount?.numberOfBusinessAccount}
           icon={"ic:sharp-business-center"}
         />
@@ -82,7 +82,7 @@ const Dashboard = () => {
 
       <Grid item xs={12} lg={4} sm={6} md={3}>
         <AppWidgetSummary
-          title="Tổng account dùng app"
+          title="Tổng tài khoản dùng app"
           total={totalAccount?.numberOfAccountUsingApp}
           color="info"
           icon={"mdi:account-circle"}

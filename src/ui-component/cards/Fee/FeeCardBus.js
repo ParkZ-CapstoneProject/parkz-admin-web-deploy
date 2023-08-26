@@ -66,6 +66,7 @@ const FeeCardBus = (props) => {
       <div className="text">
         <p className="h3"> {bus?.name} </p>
         <p className="p"> Loại hình: {bus?.businessType} </p>
+        <p className="p"> Số lượng bãi: Không giới hạn </p>
       </div>
       <div className="price">
         <h1 className="money">{formatPrice(bus?.price)}</h1>
