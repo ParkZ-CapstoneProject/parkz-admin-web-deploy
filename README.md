@@ -39,32 +39,38 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## ParkZ Web Application Admin
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+My website is deployed on vercel server [https://vercel.com](https://vercel.com)\
+And this website has an limit is not responsive for many screen.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After login will navigate to dashboard, my dashboard like this:
 
-### Code Splitting
+![](public/dashboard.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+My Website using many component and css from:
 
-### Analyzing the Bundle Size
+- Ant design [https://ant.design/](https://ant.design/)
+- Material UI [https://mui.com/](https://mui.com/)
+- Tailwind CSS [https://tailwindcss.com/](https://tailwindcss.com/)
+- Button we get from [https://uiverse.io/buttons](https://uiverse.io/buttons)
+- Alert we using Sweet Alert [https://sweetalert2.github.io/](https://sweetalert2.github.io/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This Website using Redux/toolkit and combine with SignalR to realtime for changed data avoid to reload page\
+And push notification to back ground PC with message is sent from Firebase Message Cloud [https://firebase.google.com/](https://firebase.google.com/)
 
-### Making a Progressive Web App
+This website will have many function and manage many tab like:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Manage Staff account
+- Manage Customer using app
+- Mange Business account register for my system
+- Manage parkings
 
-### Advanced Configuration
+![](public/parkings.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Manage parking is request for accept
+- Manage Booking
+- Manage Bill of manager pay for business fee
+- Setting Fee for business
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![](public/Fees.png)
