@@ -47,7 +47,7 @@ const ProfileSection = () => {
   const token = localStorage.getItem("tokenStaff");
   const staff = localStorage.getItem("staff"); // Set the authentication status here
   const staffData = JSON.parse(staff);
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenWallet, setIsOpenWallet] = useState(false);

@@ -22,7 +22,7 @@ const UploadBackSide = () => {
         formData.append("file", blob, "filename.png");
         console.log(formData);
         axios
-          .post("https://parkzapi.azurewebsites.net/api/upload-image", formData)
+          .post("https://parkzapi.azurewebsites.netapi/upload-image", formData)
           .then((response) => {
             console.log("link hinh mặt sau", response.data.link);
           });

@@ -8,7 +8,7 @@ const RealInformation = (props) => {
   const theme = useTheme();
   const [data, setData] = useState(null);
 
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
   const token = localStorage.getItem("tokenAdmin");
   const [loading, setLoading] = useState(false);
 

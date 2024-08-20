@@ -24,7 +24,7 @@ const OTP = () => {
   const location = useLocation();
   const { email } = location.state;
 
-  const apiLink = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiLink = "https://parkzapi.azurewebsites.net/api";
 
   const navigate = useNavigate();
   const handleInputOTP = (e) => {

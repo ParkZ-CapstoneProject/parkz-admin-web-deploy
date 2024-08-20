@@ -22,7 +22,7 @@ const ItemModal = (props) => {
   const [data, setData] = useState(defaultData);
   const [loading, setLoading] = useState(false);
 
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
   const token = localStorage.getItem("tokenStaff");
   const user = localStorage.getItem("staff"); // Set the authentication status here
   const staff = JSON.parse(user);

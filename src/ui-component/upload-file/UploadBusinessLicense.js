@@ -21,7 +21,7 @@ const UploadBusinessLicense = () => {
         const formData = new FormData();
         formData.append("file", blob, "filename.png");
         axios
-          .post("https://parkzapi.azurewebsites.net/api/upload-image", formData)
+          .post("https://parkzapi.azurewebsites.netapi/upload-image", formData)
           .then((response) => {
             console.log("link hình mặt trước", response.data.link);
           });

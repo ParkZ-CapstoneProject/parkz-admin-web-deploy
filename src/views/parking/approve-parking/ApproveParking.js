@@ -45,7 +45,7 @@ const ApproveParking = () => {
     setSelectedOption(event.target.value);
   };
 
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
   const token = localStorage.getItem("tokenAdmin");
 
   const handleSave = async () => {

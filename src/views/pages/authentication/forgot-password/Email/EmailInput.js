@@ -24,7 +24,7 @@ const EmailInput = () => {
 
   const navigate = useNavigate();
 
-  const apiLink = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiLink = "https://parkzapi.azurewebsites.net/api";
 
   const handleInputEmail = (event) => {
     const { value } = event.target;

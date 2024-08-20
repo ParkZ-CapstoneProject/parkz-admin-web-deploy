@@ -20,7 +20,7 @@ const ItemModal = (props) => {
   const [imageList, setImageList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
   const token = localStorage.getItem("tokenStaff");
 
   const fetchData = async () => {

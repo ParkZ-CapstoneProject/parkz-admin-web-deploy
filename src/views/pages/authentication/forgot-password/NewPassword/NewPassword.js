@@ -26,7 +26,7 @@ const NewPassword = () => {
   const [errorNewMk, setErrorNewMk] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
 
-  const apiLink = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiLink = "https://parkzapi.azurewebsites.net/api";
 
   const handleInputNewPassword = (event) => {
     const { value } = event.target;

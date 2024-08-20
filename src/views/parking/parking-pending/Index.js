@@ -8,9 +8,9 @@ const ParkingAll = (props) => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
   const token = localStorage.getItem("tokenAdmin");
-  const signalRUrl = "https://parkzserver-001-site1.btempurl.com/parkz";
+  const signalRUrl = "https://parkzapi.azurewebsites.net/parkz";
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()

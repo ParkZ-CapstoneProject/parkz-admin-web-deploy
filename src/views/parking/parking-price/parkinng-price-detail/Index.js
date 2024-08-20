@@ -32,7 +32,7 @@ const PriceDetail = () => {
     };
   }, []);
 
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
 
   const requestOptions = {
     method: "GET",

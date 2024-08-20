@@ -63,7 +63,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("tokenAdmin");
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
   const requestOptions = {
     method: "GET",
     headers: {

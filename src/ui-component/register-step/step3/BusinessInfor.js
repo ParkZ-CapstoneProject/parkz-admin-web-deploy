@@ -33,7 +33,7 @@ const BusinessInfor = () => {
 
   const [errorBusinessName, setErrorBusinessName] = useState(false);
 
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
 
   const requestBody = {
     userEntity: {

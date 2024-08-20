@@ -34,7 +34,7 @@ const CreateNewImage = () => {
 
           axios
             .post(
-              "https://parkzapi.azurewebsites.net/api/upload-image",
+              "https://parkzapi.azurewebsites.netapi/upload-image",
               formData
             )
             .then((response) => {
@@ -145,7 +145,7 @@ const CreateNewImage = () => {
 
               axios
                 .post(
-                  "https://parkzapi.azurewebsites.net/api/upload-image",
+                  "https://parkzapi.azurewebsites.netapi/upload-image",
                   formData
                 )
                 .then((response) => {

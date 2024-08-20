@@ -77,7 +77,7 @@ const ChangePassword = ({ isOpen, handleClose }) => {
     setPasswordsMatch(event.target.value === password);
   };
 
-  const apiUrl = "https://parkzserver-001-site1.btempurl.com/api";
+  const apiUrl = "https://parkzapi.azurewebsites.net/api";
 
   const requestBody = {
     userId: userData?._id,
